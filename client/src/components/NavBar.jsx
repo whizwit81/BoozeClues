@@ -11,9 +11,11 @@ import {
   NavbarToggler,
 } from "reactstrap";
 import { logout } from "../managers/authManager";
+import { useNavigate } from "react-router-dom";
 
 export default function NavBar({ loggedInUser, setLoggedInUser }) {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleNavbar = () => setOpen(!open);
 
@@ -21,13 +23,62 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
     <div>
       <Navbar color="light" light fixed="true" expand="lg">
         <NavbarBrand className="mr-auto" tag={RRNavLink} to="/">
-          🧹🧼House Rules
+          ✍️ Tabloid
         </NavbarBrand>
         {loggedInUser ? (
           <>
             <NavbarToggler onClick={toggleNavbar} />
             <Collapse isOpen={open} navbar>
-              <Nav navbar></Nav>
+              <Nav navbar>
+                <NavItem>
+                  <NavLink tag={RRNavLink} to="/posts">
+                    Posts
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink tag={RRNavLink} to={`/posts/user/${loggedInUser.id}`} >
+                    My Posts
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink tag={RRNavLink} to="/newpost">
+                    Create Post
+                  </NavLink>
+                </NavItem>
+                {loggedInUser.roles.includes("Admin") && (
+                  <>
+                    <NavItem>
+                      <NavLink tag={RRNavLink} to="/userprofiles">
+                        User Profiles
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink tag={RRNavLink} to="/tag">
+                        Tag Management
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink tag={RRNavLink} to="/approvals">
+                        Approvals
+                      </NavLink>
+                    </NavItem>
+                  </>
+                )}
+                {loggedInUser.roles.includes("Admin") && (
+                  <>
+                    <NavItem>
+                      <NavLink tag={RRNavLink} to="/category">
+                        Categories
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink tag={RRNavLink} to="/reactions">
+                        Reactions
+                      </NavLink>
+                    </NavItem>
+                  </>
+                )}
+              </Nav>
             </Collapse>
             <Button
               color="primary"
@@ -37,6 +88,7 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                 logout().then(() => {
                   setLoggedInUser(null);
                   setOpen(false);
+                  navigate("/login")
                 });
               }}
             >

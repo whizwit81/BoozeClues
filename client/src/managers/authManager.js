@@ -1,5 +1,4 @@
 const _apiUrl = "/api/auth";
-
 export const login = (email, password) => {
   return fetch(_apiUrl + "/login", {
     method: "POST",
@@ -15,17 +14,14 @@ export const login = (email, password) => {
     }
   });
 };
-
 export const logout = () => {
   return fetch(_apiUrl + "/logout");
 };
-
 export const tryGetLoggedInUser = () => {
   return fetch(_apiUrl + "/me").then((res) => {
     return res.status === 401 ? Promise.resolve(null) : res.json();
   });
 };
-
 export const register = (userProfile) => {
   userProfile.password = btoa(userProfile.password);
   return fetch(_apiUrl + "/register", {
@@ -35,5 +31,13 @@ export const register = (userProfile) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(userProfile),
-  }).then(() => tryGetLoggedInUser());
+  }).then((res) => {
+    if (res.ok) {
+      return fetch(_apiUrl + "/me").then((res) => res.json());
+    } else if (res.status === 400) {
+      return res.json();
+    } else {
+      return Promise.resolve({ errors: ["Unknown registration error"] });
+    }
+  });
 };
