@@ -8,12 +8,13 @@ export default function Register({ setLoggedInUser }) {
   const [lastName, setLastName] = useState("");
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
-  const [address, setAddress] = useState("");
+  const [imageLocation, setImageLocation] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [errors, setErrors] = useState([]);
+  const[imgSrc,setImgSrc]=useState("/Images/emp.png")
 
   const [passwordMismatch, setPasswordMismatch] = useState();
-  const [registrationFailure, setRegistrationFailure] = useState(false);
 
   const navigate = useNavigate();
 
@@ -28,19 +29,37 @@ export default function Register({ setLoggedInUser }) {
         lastName,
         userName,
         email,
-        address,
         password,
+        imageLocation: imageLocation || null,
       };
       register(newUser).then((user) => {
-        if (user) {
+        if (user.errors) {
+          setErrors(user.errors);
+        } else {
           setLoggedInUser(user);
           navigate("/");
-        } else {
-          setRegistrationFailure(true);
         }
       });
     }
   };
+
+  const handleFileChange=(e)=>{
+    if(e.target.files&& e.target.files[0])
+    {
+      let imageFile=e.target.files[0];
+      const reader=new FileReader();
+      reader.onload=(x)=>{
+        setImageLocation(imageFile);
+        setImgSrc(x.target.result)
+      }
+      reader.readAsDataURL(imageFile)
+      }
+      else{
+        setImageLocation("");
+      setImgSrc("/Images/emp.png")
+      }
+    // setImageLocation(e.target.files[0])
+  }
 
   return (
     <div className="container" style={{ maxWidth: "500px" }}>
@@ -85,16 +104,11 @@ export default function Register({ setLoggedInUser }) {
           }}
         />
       </FormGroup>
-      <FormGroup>
-        <Label>Address</Label>
-        <Input
-          type="text"
-          value={address}
-          onChange={(e) => {
-            setAddress(e.target.value);
-          }}
-        />
-      </FormGroup>
+      {/* <FormGroup>
+        <Label>Upload Image</Label>           
+        <img style={{height: 120, width: 100}} src={imgSrc} className="card-img-top"/>   
+        <input type="file" onChange={handleFileChange} required />
+      </FormGroup> */}
       <FormGroup>
         <Label>Password</Label>
         <Input
@@ -108,7 +122,7 @@ export default function Register({ setLoggedInUser }) {
         />
       </FormGroup>
       <FormGroup>
-        <Label> Confirm Password</Label>
+        <Label>Confirm Password</Label>
         <Input
           invalid={passwordMismatch}
           type="password"
@@ -120,9 +134,11 @@ export default function Register({ setLoggedInUser }) {
         />
         <FormFeedback>Passwords do not match!</FormFeedback>
       </FormGroup>
-      <p style={{ color: "red" }} hidden={!registrationFailure}>
-        Registration Failure
-      </p>
+      {errors.map((e, i) => (
+        <p key={i} style={{ color: "red" }}>
+          {e}
+        </p>
+      ))}
       <Button
         color="primary"
         onClick={handleSubmit}
