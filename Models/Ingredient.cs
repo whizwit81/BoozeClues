@@ -10,4 +10,6 @@ public class Ingredient
 {
     public int Id { get; set; }
     public string Name { get; set; }
+    public bool IsAlcoholic { get; set; }
+    public List<CocktailRecipe> CocktailRecipes { get; set; }
 }

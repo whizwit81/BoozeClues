@@ -11,10 +11,10 @@ export const Home = ({ loggedInUser }) => {
     return (
         <>
             <div className="home-container">
-                <h2>Welcome to the Tabloid!</h2>
+                <h2>Welcome to BoozeClues!</h2>
                 {posts.length > 0 ? (
                     <div>
-                        <h3>Your Subscribed Posts</h3>
+                        <h3>Check out our Cocktail Recipes!</h3>
                         <ul className="post-master-container plain-list">
                             {posts.map(post => (
                                 <li className="post" key={post.id}>
