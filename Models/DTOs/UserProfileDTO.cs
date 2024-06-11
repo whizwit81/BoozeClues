@@ -14,7 +14,6 @@ namespace BoozeClues.Models.DTOs
         public string LastName { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
-        public DateTime CreateDateTime { get; set; }
         public string ImageLocation { get; set; }
         public string IdentityUserId { get; set; }
 

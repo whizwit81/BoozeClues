@@ -27,29 +27,28 @@ public class UserProfileController : ControllerBase
         return Ok(_dbContext.UserProfiles.ToList());
     }
 
-    [HttpGet("withroles")]
-    [Authorize(Roles = "Admin")]
-    public IActionResult GetWithRoles()
-    {
-        return Ok(_dbContext.UserProfiles
-        .Include(up => up.IdentityUser)
-        .Select(up => new UserProfile
-        {
-            Id = up.Id,
-            FirstName = up.FirstName,
-            LastName = up.LastName,
-            Email = up.IdentityUser.Email,
-            UserName = up.IdentityUser.UserName,
-            IdentityUserId = up.IdentityUserId,
-            Roles = _dbContext.UserRoles
-            .Where(ur => ur.UserId == up.IdentityUserId)
-            .Select(ur => _dbContext.Roles.SingleOrDefault(r => r.Id == ur.RoleId).Name)
-            .ToList()
-        }));
-    }
+    // [HttpGet("withroles")]
+    // [Authorize(Roles = "Admin")]
+    // public IActionResult GetWithRoles()
+    // {
+    //     return Ok(_dbContext.UserProfiles
+    //     .Include(up => up.IdentityUser)
+    //     .Select(up => new UserProfile
+    //     {
+    //         Id = up.Id,
+    //         FirstName = up.FirstName,
+    //         LastName = up.LastName,
+    //         Email = up.IdentityUser.Email,
+    //         UserName = up.IdentityUser.UserName,
+    //         IdentityUserId = up.IdentityUserId,
+    //         Roles = _dbContext.UserRoles
+    //         .Where(ur => ur.UserId == up.IdentityUserId)
+    //         .Select(ur => _dbContext.Roles.SingleOrDefault(r => r.Id == ur.RoleId).Name)
+    //         .ToList()
+    //     }));
+    // }
 
     [HttpPost("promote/{id}")]
-    [Authorize(Roles = "Admin")]
     public IActionResult Promote(string id)
     {
         IdentityRole role = _dbContext.Roles.SingleOrDefault(r => r.Name == "Admin");
@@ -62,23 +61,6 @@ public class UserProfileController : ControllerBase
         return NoContent();
     }
 
-    [HttpPost("demote/{id}")]
-    [Authorize(Roles = "Admin")]
-    public IActionResult Demote(string id)
-    {
-        IdentityRole role = _dbContext.Roles
-            .SingleOrDefault(r => r.Name == "Admin");
-
-        IdentityUserRole<string> userRole = _dbContext
-            .UserRoles
-            .SingleOrDefault(ur =>
-                ur.RoleId == role.Id &&
-                ur.UserId == id);
-
-        _dbContext.UserRoles.Remove(userRole);
-        _dbContext.SaveChanges();
-        return NoContent();
-    }
 
     //[Authorize]
     [HttpGet("{id}")]
@@ -95,19 +77,15 @@ public class UserProfileController : ControllerBase
         }
         user.FirstName = user.FirstName;
         user.LastName = user.LastName;
-        user.CreateDateTime = user.CreateDateTime;
         user.UserName = user.IdentityUser.UserName;
         user.Email = user.IdentityUser.Email;
-        user.Roles = _dbContext.UserRoles
-        .Where(ur => ur.UserId == user.IdentityUser.Id)
-        .Select(ur => _dbContext.Roles.SingleOrDefault(r => r.Id == ur.RoleId).Name)
-        .ToList();
+    
+
         return Ok(user);
     }
 
 
     [HttpPut("{id}")]
-    [Authorize(Roles = "Admin")]
     public IActionResult UpdateUserProfile(int id, UserProfileDTO updatedProfile)
     {
         var userProfile = _dbContext.UserProfiles

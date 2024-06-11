@@ -25,18 +25,10 @@ namespace BoozeClues.Models
         public string Email { get; set; }
 
         [Required]
-        public DateTime CreateDateTime { get; set; }
-        public string FormattedDateTime
-        {
-            get { return CreateDateTime.Date.ToString("MM - dd - yyyy"); }
-        }
-
-        [Required]
         public string IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }
+        public List<CocktailRecipe> CocktailRecipes { get; set; }
 
-        [NotMapped]
-        public List<string> Roles { get; set; }
         public string FullName
             {
                 get

@@ -6,12 +6,12 @@ using Microsoft.AspNetCore.Identity;
 
 namespace BoozeClues.Models;
 
-public class CocktailIngredient
+public class RecipeIngredientDTO
 {
-    public int CocktailId { get; set; }
+    public int CocktailRecipeId { get; set; }
     public int IngredientId { get; set; }
     public string Quantity { get; set; }
 
-    public Cocktail Cocktail { get; set; }
+    public CocktailRecipe CocktailRecipe { get; set; }
     public Ingredient Ingredient { get; set; }
 }
