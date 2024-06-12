@@ -39,7 +39,7 @@ namespace BoozeClues.Data
             modelBuilder.Entity<IdentityUserToken<string>>()
                 .HasKey(t => new { t.UserId, t.LoginProvider, t.Name });
 
-            // Seeding Roles
+            // // Seeding Roles
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
             {
                 Id = "c3aaeb97-d2ba-4a53-a521-4eea61e59b35",
@@ -210,22 +210,23 @@ namespace BoozeClues.Data
 
 
                 modelBuilder.Entity<CocktailRecipe>().HasData(
-                new CocktailRecipe { Id = 1, Name = "Margarita", Description = "A refreshing tequila-based cocktail with lime juice and Cointreau.", Instructions = "Shake all ingredients with ice, then strain into a chilled glass.", GlassTypeId = 1, UserProfileId = 1 },
-                new CocktailRecipe { Id = 2, Name = "Old Fashioned", Description = "A classic cocktail made with bourbon, simple syrup, and bitters.", Instructions = "Stir ingredients with ice, then strain into a glass over ice.", GlassTypeId = 3, UserProfileId = 2 },
-                new CocktailRecipe { Id = 3, Name = "Cosmopolitan", Description = "A stylish cocktail featuring vodka, triple sec, lime juice, and cranberry juice.", Instructions = "Shake all ingredients with ice, then strain into a chilled glass.", GlassTypeId = 2, UserProfileId = 3 },
-                new CocktailRecipe { Id = 4, Name = "Mojito", Description = "A minty and refreshing cocktail made with rum, lime juice, and soda water.", Instructions = "Muddle mint leaves with lime juice and sugar, then add rum and top up with soda water.", GlassTypeId = 1, UserProfileId = 4 },
-                new CocktailRecipe { Id = 5, Name = "Pina Colada", Description = "A tropical cocktail made with rum, coconut cream, and pineapple juice.", Instructions = "Blend all ingredients with ice until smooth, then serve in a chilled glass.", GlassTypeId = 1, UserProfileId = 5 },
-                new CocktailRecipe { Id = 6, Name = "Martini", Description = "A classic cocktail made with gin and a touch of blue curacao.", Instructions = "Stir ingredients with ice, then strain into a chilled glass.", GlassTypeId = 2, UserProfileId = 6 },
-                new CocktailRecipe { Id = 7, Name = "Mai Tai", Description = "A fruity cocktail made with rum, maraschino liqueur, peach schnapps, and lemon juice.", Instructions = "Shake all ingredients with ice, then strain into a glass over ice.", GlassTypeId = 4, UserProfileId = 1 },
-                new CocktailRecipe { Id = 8, Name = "Moscow Mule", Description = "A spicy and refreshing cocktail made with vodka, lime juice, and ginger beer.", Instructions = "Combine ingredients in a glass with ice, then stir gently.", GlassTypeId = 1, UserProfileId = 2 },
-                new CocktailRecipe { Id = 9, Name = "Whiskey Sour", Description = "A tangy cocktail made with bourbon, simple syrup, and lemon juice.", Instructions = "Shake all ingredients with ice, then strain into a glass over ice.", GlassTypeId = 3, UserProfileId = 3 },
-                new CocktailRecipe { Id = 10, Name = "Daiquiri", Description = "A sweet and sour cocktail made with rum, simple syrup, and lime juice.", Instructions = "Shake all ingredients with ice, then strain into a chilled glass.", GlassTypeId = 5, UserProfileId = 4 },
-                new CocktailRecipe { Id = 11, Name = "Tequila Sunrise", Description = "A colorful cocktail made with tequila, orange juice, and grenadine.", Instructions = "Pour tequila and orange juice into a glass with ice, then drizzle grenadine on top.", GlassTypeId = 1, UserProfileId = 5 },
-                new CocktailRecipe { Id = 12, Name = "Long Island Iced Tea", Description = "A strong cocktail made with vodka, gin, rum, triple sec, lime juice, and soda water.", Instructions = "Shake all ingredients except soda water with ice, then strain into a glass and top up with soda water.", GlassTypeId = 1, UserProfileId = 6 },
-                new CocktailRecipe { Id = 13, Name = "Bloody Mary", Description = "A savory cocktail made with vodka, tomato juice, and lemon juice.", Instructions = "Combine ingredients in a glass with ice, then stir gently.", GlassTypeId = 1, UserProfileId = 1 },
-                new CocktailRecipe { Id = 14, Name = "Negroni", Description = "A bitter and balanced cocktail made with gin, blue curacao, and bitters.", Instructions = "Stir ingredients with ice, then strain into a glass over ice.", GlassTypeId = 2, UserProfileId = 2 },
-                new CocktailRecipe { Id = 15, Name = "Blue Lagoon", Description = "A vibrant cocktail made with vodka, blue curacao, and orange juice.", Instructions = "Shake all ingredients with ice, then strain into a chilled glass.", GlassTypeId = 2, UserProfileId = 3 }
-            );
+    new CocktailRecipe { Id = 1, Name = "Margarita", Description = "A refreshing tequila-based cocktail with lime juice and Cointreau.", Instructions = "Shake all ingredients with ice, then strain into a chilled glass.", GlassTypeId = 1, UserProfileId = 1},
+    new CocktailRecipe { Id = 2, Name = "Old Fashioned", Description = "A classic cocktail made with bourbon, simple syrup, and bitters.", Instructions = "Stir ingredients with ice, then strain into a glass over ice.", GlassTypeId = 3, UserProfileId = 2},
+    new CocktailRecipe { Id = 3, Name = "Cosmopolitan", Description = "A stylish cocktail featuring vodka, triple sec, lime juice, and cranberry juice.", Instructions = "Shake all ingredients with ice, then strain into a chilled glass.", GlassTypeId = 2, UserProfileId = 3},
+    new CocktailRecipe { Id = 4, Name = "Mojito", Description = "A minty and refreshing cocktail made with rum, lime juice, and soda water.", Instructions = "Muddle mint leaves with lime juice and sugar, then add rum and top up with soda water.", GlassTypeId = 1, UserProfileId = 4},
+    new CocktailRecipe { Id = 5, Name = "Pina Colada", Description = "A tropical cocktail made with rum, coconut cream, and pineapple juice.", Instructions = "Blend all ingredients with ice until smooth, then serve in a chilled glass.", GlassTypeId = 1, UserProfileId = 5},
+    new CocktailRecipe { Id = 6, Name = "Martini", Description = "A classic cocktail made with gin and a touch of blue curacao.", Instructions = "Stir ingredients with ice, then strain into a chilled glass.", GlassTypeId = 2, UserProfileId = 6},
+    new CocktailRecipe { Id = 7, Name = "Mai Tai", Description = "A fruity cocktail made with rum, maraschino liqueur, peach schnapps, and lemon juice.", Instructions = "Shake all ingredients with ice, then strain into a glass over ice.", GlassTypeId = 4, UserProfileId = 1},
+    new CocktailRecipe { Id = 8, Name = "Moscow Mule", Description = "A spicy and refreshing cocktail made with vodka, lime juice, and ginger beer.", Instructions = "Combine ingredients in a glass with ice, then stir gently.", GlassTypeId = 1, UserProfileId = 2},
+    new CocktailRecipe { Id = 9, Name = "Whiskey Sour", Description = "A tangy cocktail made with bourbon, simple syrup, and lemon juice.", Instructions = "Shake all ingredients with ice, then strain into a glass over ice.", GlassTypeId = 3, UserProfileId = 3},
+    new CocktailRecipe { Id = 10, Name = "Daiquiri", Description = "A sweet and sour cocktail made with rum, simple syrup, and lime juice.", Instructions = "Shake all ingredients with ice, then strain into a chilled glass.", GlassTypeId = 5, UserProfileId = 4},
+    new CocktailRecipe { Id = 11, Name = "Tequila Sunrise", Description = "A colorful cocktail made with tequila, orange juice, and grenadine.", Instructions = "Pour tequila and orange juice into a glass with ice, then drizzle grenadine on top.", GlassTypeId = 1, UserProfileId = 5},
+    new CocktailRecipe { Id = 12, Name = "Long Island Iced Tea", Description = "A strong cocktail made with vodka, gin, rum, triple sec, lime juice, and soda water.", Instructions = "Shake all ingredients except soda water with ice, then strain into a glass and top up with soda water.", GlassTypeId = 1, UserProfileId = 6},
+    new CocktailRecipe { Id = 13, Name = "Bloody Mary", Description = "A savory cocktail made with vodka, tomato juice, and lemon juice.", Instructions = "Combine ingredients in a glass with ice, then stir gently.", GlassTypeId = 1, UserProfileId = 1},
+    new CocktailRecipe { Id = 14, Name = "Negroni", Description = "A bitter and balanced cocktail made with gin, blue curacao, and bitters.", Instructions = "Stir ingredients with ice, then strain into a glass over ice.", GlassTypeId = 2, UserProfileId = 2},
+    new CocktailRecipe { Id = 15, Name = "Blue Lagoon", Description = "A vibrant cocktail made with vodka, blue curacao, and orange juice.", Instructions = "Shake all ingredients with ice, then strain into a chilled glass.", GlassTypeId = 2, UserProfileId = 3}
+);
+
 
 
 

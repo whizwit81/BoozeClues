@@ -18,5 +18,7 @@ public class CocktailRecipe
         public UserProfile UserProfile { get; set; }
         public GlassType GlassType { get; set; }
         public List<RecipeIngredient> RecipeIngredients { get; set; }
+        public List<Ingredient> Ingredients { get; set; }
+        // public string ImageUrl { get; set; }
     
     }

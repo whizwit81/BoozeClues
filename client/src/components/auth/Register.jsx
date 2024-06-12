@@ -8,11 +8,11 @@ export default function Register({ setLoggedInUser }) {
   const [lastName, setLastName] = useState("");
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
-  const [imageLocation, setImageLocation] = useState("");
+  // const [imageLocation, setImageLocation] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
-  const[imgSrc,setImgSrc]=useState("/Images/emp.png")
+  // const[imgSrc,setImgSrc]=useState("/Images/emp.png")
 
   const [passwordMismatch, setPasswordMismatch] = useState();
 
@@ -30,7 +30,7 @@ export default function Register({ setLoggedInUser }) {
         userName,
         email,
         password,
-        imageLocation: imageLocation || null,
+        // imageLocation: imageLocation || null,
       };
       register(newUser).then((user) => {
         if (user.errors) {
@@ -43,23 +43,23 @@ export default function Register({ setLoggedInUser }) {
     }
   };
 
-  const handleFileChange=(e)=>{
-    if(e.target.files&& e.target.files[0])
-    {
-      let imageFile=e.target.files[0];
-      const reader=new FileReader();
-      reader.onload=(x)=>{
-        setImageLocation(imageFile);
-        setImgSrc(x.target.result)
-      }
-      reader.readAsDataURL(imageFile)
-      }
-      else{
-        setImageLocation("");
-      setImgSrc("/Images/emp.png")
-      }
-    // setImageLocation(e.target.files[0])
-  }
+  // const handleFileChange=(e)=>{
+  //   if(e.target.files&& e.target.files[0])
+  //   {
+  //     let imageFile=e.target.files[0];
+  //     const reader=new FileReader();
+  //     reader.onload=(x)=>{
+  //       setImageLocation(imageFile);
+  //       setImgSrc(x.target.result)
+  //     }
+  //     reader.readAsDataURL(imageFile)
+  //     }
+  //     else{
+  //       setImageLocation("");
+  //     setImgSrc("/Images/emp.png")
+  //     }
+  //   // setImageLocation(e.target.files[0])
+  // }
 
   return (
     <div className="container" style={{ maxWidth: "500px" }}>
@@ -134,9 +134,9 @@ export default function Register({ setLoggedInUser }) {
         />
         <FormFeedback>Passwords do not match!</FormFeedback>
       </FormGroup>
-      {errors.map((e, i) => (
+      {errors.map((error, i) => (
         <p key={i} style={{ color: "red" }}>
-          {e}
+          {error}
         </p>
       ))}
       <Button

@@ -23,7 +23,7 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
     <div>
       <Navbar color="light" light fixed="true" expand="lg">
         <NavbarBrand className="mr-auto" tag={RRNavLink} to="/">
-          ✍️ BoozeClues
+        🍸 BoozeClues 🍸
         </NavbarBrand>
         {loggedInUser ? (
           <>
@@ -31,53 +31,20 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
             <Collapse isOpen={open} navbar>
               <Nav navbar>
                 <NavItem>
-                  <NavLink tag={RRNavLink} to="/posts">
-                    Posts
+                  <NavLink tag={RRNavLink} to="/recipes">
+                    Drink Recipes
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink tag={RRNavLink} to={`/posts/user/${loggedInUser.id}`} >
-                    My Posts
+                    Add Drink
                   </NavLink>
                 </NavItem>
-                <NavItem>
+                {/* <NavItem>
                   <NavLink tag={RRNavLink} to="/newpost">
-                    Create Post
+                   My Drinks
                   </NavLink>
-                </NavItem>
-                {loggedInUser.roles.includes("Admin") && (
-                  <>
-                    <NavItem>
-                      <NavLink tag={RRNavLink} to="/userprofiles">
-                        User Profiles
-                      </NavLink>
-                    </NavItem>
-                    <NavItem>
-                      <NavLink tag={RRNavLink} to="/tag">
-                        Tag Management
-                      </NavLink>
-                    </NavItem>
-                    <NavItem>
-                      <NavLink tag={RRNavLink} to="/approvals">
-                        Approvals
-                      </NavLink>
-                    </NavItem>
-                  </>
-                )}
-                {loggedInUser.roles.includes("Admin") && (
-                  <>
-                    <NavItem>
-                      <NavLink tag={RRNavLink} to="/category">
-                        Categories
-                      </NavLink>
-                    </NavItem>
-                    <NavItem>
-                      <NavLink tag={RRNavLink} to="/reactions">
-                        Reactions
-                      </NavLink>
-                    </NavItem>
-                  </>
-                )}
+                </NavItem> */}
               </Nav>
             </Collapse>
             <Button

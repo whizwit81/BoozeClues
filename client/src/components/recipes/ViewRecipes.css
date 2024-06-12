@@ -1,0 +1,25 @@
+.cocktail-recipes-list-container {
+    padding: 20px;
+    text-align: center;
+}
+
+.cocktail-recipes-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.cocktail-recipe {
+    margin-bottom: 20px;
+}
+
+.cocktail-recipe .card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.cocktail-recipe .card-title {
+    margin-top: 0;
+    text-align: center;
+}

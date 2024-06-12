@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Text;
 using BoozeClues.Models;
-using BoozeClues.Models.DTOs;
 using BoozeClues.Data;
 
 namespace BoozeClues.Controllers;
@@ -102,24 +101,42 @@ public class AuthController : ControllerBase
         var roles = User.FindAll(ClaimTypes.Role).Select(r => r.Value).ToList();
         if (profile != null)
         {
-            var userDto = new UserProfileDTO
-            {
-                Id = profile.Id,
-                FirstName = profile.FirstName,
-                LastName = profile.LastName,
-                IdentityUserId = identityUserId,
-                UserName = User.FindFirstValue(ClaimTypes.Name),
-                Email = User.FindFirstValue(ClaimTypes.Email),
-                Roles = roles
-            };
-
-            return Ok(userDto);
+            profile.UserName = User.FindFirstValue(ClaimTypes.Name);
+            profile.Email = User.FindFirstValue(ClaimTypes.Email);
+            profile.Roles = roles;
+            return Ok(profile);
         }
         return NotFound();
     }
 
+    // public async Task<IActionResult> Register([FromForm] UserRegistrationModel model, IFormFile file)
+    //     {
+    //         if (file == null || file.Length == 0)
+    //         {
+    //             return BadRequest("No file uploaded.");
+    //         }
+
+    //         var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
+
+    //         if (!Directory.Exists(uploadPath))
+    //         {
+    //             Directory.CreateDirectory(uploadPath);
+    //         }
+
+    //         var filePath = Path.Combine(uploadPath, file.FileName);
+
+    //         using (var stream = new FileStream(filePath, FileMode.Create))
+    //         {
+    //             await file.CopyToAsync(stream);
+    //         }
+
+    //         // Here you would typically save the user data and the file path to your database.
+
+    //         return Ok(new { model.FirstName, model.LastName, model.Email, FilePath = filePath });
+    //     }
+
     [HttpPost("register")]
-    public async Task<IActionResult> Register(RegistrationDTO registration)
+    public async Task<IActionResult> Register(Registration registration)
     {
         var user = new IdentityUser
         {
@@ -129,11 +146,20 @@ public class AuthController : ControllerBase
 
         var password = Encoding
             .GetEncoding("iso-8859-1")
-            .GetString(Convert.FromBase64String(registration.Password));
+            .GetString(Convert.FromBase64String(registration.Password));           
 
         var result = await _userManager.CreateAsync(user, password);
         if (result.Succeeded)
         {
+            // string imagePath="";
+            // if(registration.ImageLocation!=null)
+            // {
+            //     imagePath = await SaveImage(registration.ImageLocation);
+            // }
+            // else{
+            //     imagePath=null;
+            // }
+            
             _dbContext.UserProfiles.Add(new UserProfile
             {
                 FirstName = registration.FirstName,
@@ -157,6 +183,18 @@ public class AuthController : ControllerBase
 
             return Ok();
         }
-        return StatusCode(500);
+        return BadRequest(new { Errors = result.Errors.Select(ir => ir.Description) });
+    }
+
+    [NonAction]
+    public async Task<string> SaveImage(IFormFile imageFile)
+    {
+        string imageName = Guid.NewGuid() + Path.GetExtension (imageFile.FileName);
+        var imagePath = Path. Combine(Directory.GetCurrentDirectory(), "Uploads",imageName);
+        using (var fileStream = new FileStream(imagePath, FileMode.Create))
+        {
+          await imageFile.CopyToAsync(fileStream);
+        }
+        return imageName;
     }
 }
