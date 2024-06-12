@@ -3,6 +3,7 @@ using System;
 using BoozeClues.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BoozeClues.Migrations
 {
     [DbContext(typeof(BoozeCluesDbContext))]
-    partial class BoozeCluesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240612181212_ImageUpdate")]
+    partial class ImageUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,6 +39,10 @@ namespace BoozeClues.Migrations
 
                     b.Property<int>("GlassTypeId")
                         .HasColumnType("integer");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Instructions")
                         .IsRequired()
@@ -62,6 +69,7 @@ namespace BoozeClues.Migrations
                             Id = 1,
                             Description = "A refreshing tequila-based cocktail with lime juice and Cointreau.",
                             GlassTypeId = 1,
+                            ImageUrl = "https://www.allrecipes.com/thmb/Bw1ugPXhDyxWjhZBoplUSe2TJ_A=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/32501-margaritas-on-the-rocks-DDMFS-beauty-4x3-BG-3070-ba9ff637b745426ab1b6c4289260fdad.jpg",
                             Instructions = "Shake all ingredients with ice, then strain into a chilled glass.",
                             Name = "Margarita",
                             UserProfileId = 1
@@ -71,6 +79,7 @@ namespace BoozeClues.Migrations
                             Id = 2,
                             Description = "A classic cocktail made with bourbon, simple syrup, and bitters.",
                             GlassTypeId = 3,
+                            ImageUrl = "https://www.knobcreek.com/sites/default/files/2018-06/thumb__0010_8909_KC_Classic_Old_Fashioned-4474.webp",
                             Instructions = "Stir ingredients with ice, then strain into a glass over ice.",
                             Name = "Old Fashioned",
                             UserProfileId = 2
@@ -80,6 +89,7 @@ namespace BoozeClues.Migrations
                             Id = 3,
                             Description = "A stylish cocktail featuring vodka, triple sec, lime juice, and cranberry juice.",
                             GlassTypeId = 2,
+                            ImageUrl = "https://dailyappetite.com/wp-content/uploads/2017/05/The-perfect-Cosmo-Cocktail.jpg",
                             Instructions = "Shake all ingredients with ice, then strain into a chilled glass.",
                             Name = "Cosmopolitan",
                             UserProfileId = 3
@@ -89,6 +99,7 @@ namespace BoozeClues.Migrations
                             Id = 4,
                             Description = "A minty and refreshing cocktail made with rum, lime juice, and soda water.",
                             GlassTypeId = 1,
+                            ImageUrl = "https://www.bhg.com/thmb/Bew5wgRNxDE0blM6BuQUr9UND0c=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/diy-mojito-RU186788-1-b3184133555544bbae783b67881d1400.jpg",
                             Instructions = "Muddle mint leaves with lime juice and sugar, then add rum and top up with soda water.",
                             Name = "Mojito",
                             UserProfileId = 4
@@ -98,6 +109,7 @@ namespace BoozeClues.Migrations
                             Id = 5,
                             Description = "A tropical cocktail made with rum, coconut cream, and pineapple juice.",
                             GlassTypeId = 1,
+                            ImageUrl = "https://www.onceuponachef.com/images/2023/07/pina-coladas-760x1013.jpg",
                             Instructions = "Blend all ingredients with ice until smooth, then serve in a chilled glass.",
                             Name = "Pina Colada",
                             UserProfileId = 5
@@ -107,6 +119,7 @@ namespace BoozeClues.Migrations
                             Id = 6,
                             Description = "A classic cocktail made with gin and a touch of blue curacao.",
                             GlassTypeId = 2,
+                            ImageUrl = "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/dirty-martini-3e964eb.jpg?quality=90&webp=true&resize=300,272",
                             Instructions = "Stir ingredients with ice, then strain into a chilled glass.",
                             Name = "Martini",
                             UserProfileId = 6
@@ -116,6 +129,7 @@ namespace BoozeClues.Migrations
                             Id = 7,
                             Description = "A fruity cocktail made with rum, maraschino liqueur, peach schnapps, and lemon juice.",
                             GlassTypeId = 4,
+                            ImageUrl = "https://punchdrink.com/wp-content/uploads/2023/04/Article-Bitter-Mai-Tai-Campari-Tiki-Cocktail-Recipe-800x450.jpg",
                             Instructions = "Shake all ingredients with ice, then strain into a glass over ice.",
                             Name = "Mai Tai",
                             UserProfileId = 1
@@ -125,6 +139,7 @@ namespace BoozeClues.Migrations
                             Id = 8,
                             Description = "A spicy and refreshing cocktail made with vodka, lime juice, and ginger beer.",
                             GlassTypeId = 1,
+                            ImageUrl = "https://www.foodandwine.com/thmb/a45tAqLW3OQQc86fBjdHioFSKa4=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/moscow-mule-FT-RECIPE0521-6bb69ade441546c1b1210b4e55dbcb23.jpg",
                             Instructions = "Combine ingredients in a glass with ice, then stir gently.",
                             Name = "Moscow Mule",
                             UserProfileId = 2
@@ -134,6 +149,7 @@ namespace BoozeClues.Migrations
                             Id = 9,
                             Description = "A tangy cocktail made with bourbon, simple syrup, and lemon juice.",
                             GlassTypeId = 3,
+                            ImageUrl = "path_to_image/WhiskeySour.png",
                             Instructions = "Shake all ingredients with ice, then strain into a glass over ice.",
                             Name = "Whiskey Sour",
                             UserProfileId = 3
@@ -143,6 +159,7 @@ namespace BoozeClues.Migrations
                             Id = 10,
                             Description = "A sweet and sour cocktail made with rum, simple syrup, and lime juice.",
                             GlassTypeId = 5,
+                            ImageUrl = "path_to_image/Daiquiri.png",
                             Instructions = "Shake all ingredients with ice, then strain into a chilled glass.",
                             Name = "Daiquiri",
                             UserProfileId = 4
@@ -152,6 +169,7 @@ namespace BoozeClues.Migrations
                             Id = 11,
                             Description = "A colorful cocktail made with tequila, orange juice, and grenadine.",
                             GlassTypeId = 1,
+                            ImageUrl = "https://images.immediate.co.uk/production/volatile/sites/30/2018/04/tequila-sunrise-18167a1.jpg?quality=90&webp=true&resize=300,272",
                             Instructions = "Pour tequila and orange juice into a glass with ice, then drizzle grenadine on top.",
                             Name = "Tequila Sunrise",
                             UserProfileId = 5
@@ -161,6 +179,7 @@ namespace BoozeClues.Migrations
                             Id = 12,
                             Description = "A strong cocktail made with vodka, gin, rum, triple sec, lime juice, and soda water.",
                             GlassTypeId = 1,
+                            ImageUrl = "https://tequilapop.dk/wp-content/uploads/elementor/thumbs/long_island_iced_tea-q5alwkgi5hjzhgxhlnq1wixy0xntl4qdu2ng5r4kcw.jpg",
                             Instructions = "Shake all ingredients except soda water with ice, then strain into a glass and top up with soda water.",
                             Name = "Long Island Iced Tea",
                             UserProfileId = 6
@@ -170,6 +189,7 @@ namespace BoozeClues.Migrations
                             Id = 13,
                             Description = "A savory cocktail made with vodka, tomato juice, and lemon juice.",
                             GlassTypeId = 1,
+                            ImageUrl = "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/bloody-mary-a2983ba.jpg?quality=90&webp=true&resize=300,272",
                             Instructions = "Combine ingredients in a glass with ice, then stir gently.",
                             Name = "Bloody Mary",
                             UserProfileId = 1
@@ -179,6 +199,7 @@ namespace BoozeClues.Migrations
                             Id = 14,
                             Description = "A bitter and balanced cocktail made with gin, blue curacao, and bitters.",
                             GlassTypeId = 2,
+                            ImageUrl = "https://www.liquor.com/thmb/ir1aDhuMlSbSMc8N9qpWEgX4_NU=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/mezcal-negroni-1500x1500-primary-6f6c472050a949c8a55aa07e1b5a2d1b.jpg",
                             Instructions = "Stir ingredients with ice, then strain into a glass over ice.",
                             Name = "Negroni",
                             UserProfileId = 2
@@ -188,6 +209,7 @@ namespace BoozeClues.Migrations
                             Id = 15,
                             Description = "A vibrant cocktail made with vodka, blue curacao, and orange juice.",
                             GlassTypeId = 2,
+                            ImageUrl = "https://kitchengeekery.com/wp-content/webpc-passthru.php?src=https://kitchengeekery.com/wp-content/uploads/2021/01/blue-lagoon-cocktail-300x240.jpg&nocache=1",
                             Instructions = "Shake all ingredients with ice, then strain into a chilled glass.",
                             Name = "Blue Lagoon",
                             UserProfileId = 3
@@ -960,13 +982,13 @@ namespace BoozeClues.Migrations
                         {
                             Id = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a9223dd4-9b34-4aa9-b418-034e44e5dfd9",
+                            ConcurrencyStamp = "ffdbf7a7-97e3-4b41-8ebb-20f3a249edbb",
                             Email = "admina@strator.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEHr1CtolMAkaxBDWhYK5hr+e0uRhWulZmbfDmAPxmzgqPlVNcMFX4b8pRgLdRxyYmg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDBTkUMMuu4ugYcxKu7CoIiu+ZJIyHrWSUPQLlLvFr8jIoWf+5qAvK019cO5M8pejw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2bb34d0d-ee84-495f-bb0b-dab2370fb2ea",
+                            SecurityStamp = "e6a5388c-bd84-4878-ae7d-858b4a117a6c",
                             TwoFactorEnabled = false,
                             UserName = "Administrator"
                         },
@@ -974,13 +996,13 @@ namespace BoozeClues.Migrations
                         {
                             Id = "d8d76512-74f1-43bb-b1fd-87d3a8aa36df",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9b2489a4-b47b-48da-8fde-fc265d750e0a",
+                            ConcurrencyStamp = "a80ed860-c7c4-4e09-b22f-eec1adf4a992",
                             Email = "john@doe.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEL6cqaDD+ZUEx2CmMyVGTZpOqc/0G6YvQgYeOW2LINWKv/ILsXhuzLDwhU9UQ2q5ag==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOJ3rpbbAuUAEBYl3sWBJZYcNysboHADTB27k0+lGtAv4HDwgjnKw1lg2qxijy1PhQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "503bac38-5755-4fdb-8776-683c81c4ee88",
+                            SecurityStamp = "fb93ef58-3cf8-4852-9791-66517a796b0b",
                             TwoFactorEnabled = false,
                             UserName = "JohnDoe"
                         },
@@ -988,13 +1010,13 @@ namespace BoozeClues.Migrations
                         {
                             Id = "a7d21fac-3b21-454a-a747-075f072d0cf3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3e07d51e-83f1-4b6e-be3b-48b9632cf8d6",
+                            ConcurrencyStamp = "e079a45d-e621-46df-bea6-3745accd912c",
                             Email = "jane@smith.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEPeVwC+VsRZE47xgZ56YNOUZ59mNVI4BTZob5L46DesEA9dPB6oyb13UTah757S3Pg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKdZ6UfQjjMoDvtricTjk0dJE2cMPcLPJaXthQWrLFwDsTe9cvOcfuCvSnHLZR0cTg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "df3f8ab4-805e-4a71-b6b3-0b28409fb6fe",
+                            SecurityStamp = "626df5a8-0f34-4763-9f55-10522113ac61",
                             TwoFactorEnabled = false,
                             UserName = "JaneSmith"
                         },
@@ -1002,13 +1024,13 @@ namespace BoozeClues.Migrations
                         {
                             Id = "c806cfae-bda9-47c5-8473-dd52fd056a9b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "168e53e7-f616-402e-ad55-fcc025167534",
+                            ConcurrencyStamp = "6af0e8db-240c-470f-9127-a9352133fa88",
                             Email = "alice@johnson.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEGi63GW7ECgfibiAKh9reTqqRVis04/3TbTnCMa2bZh8gsUhlFGgrJN2gZZjKFz7vg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIolDPEneYkP9wuOSk7ZWb4tJdo2bXzqTa+UcHcqf24UsTI5hX8QppbF0sKAJG+e5Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fff68067-b354-4807-85fa-d1d3e1e0cc95",
+                            SecurityStamp = "19b25447-35de-44ab-af19-50742795f7e9",
                             TwoFactorEnabled = false,
                             UserName = "AliceJohnson"
                         },
@@ -1016,13 +1038,13 @@ namespace BoozeClues.Migrations
                         {
                             Id = "9ce89d88-75da-4a80-9b0d-3fe58582b8e2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3276d9f8-105a-4205-975d-d18cddc55c35",
+                            ConcurrencyStamp = "78902105-c71e-4b2f-b94c-91f0baf80064",
                             Email = "bob@williams.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAELANY2lw6qpvF6/oCzCeQKuBp8QG0d7Yjm0EUDpdUMY0h2JQzkS4mYq8Kxd59J/tOg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPdYT8+YzAeqvZUkQ2jD0nRPjM9Cy6QM1YJWVM7G+F8RWxHUOtUn6jdLsNWIPdoeJw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a425955d-4d2c-45c6-b7bc-e8088581a104",
+                            SecurityStamp = "3f3c67c1-8911-426c-956b-ea7cee2af1a3",
                             TwoFactorEnabled = false,
                             UserName = "BobWilliams"
                         },
@@ -1030,13 +1052,13 @@ namespace BoozeClues.Migrations
                         {
                             Id = "d224a03d-bf0c-4a05-b728-e3521e45d74d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f332ecee-e9c1-4bec-913f-0f6fcfbcf649",
+                            ConcurrencyStamp = "2b705e47-e96c-4056-89d6-2572554605ce",
                             Email = "eve@davis.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAECJRkR2rb2x8JuRZg+5wKfIfTGe3bGJ2S+oHQB8oWwJxc4RUWltJBxul0+MCgL5VKg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMokMXBwgeSXucWJrsNAk0b0zBPHJwK2i/7JTEJ1R1n/GLxAiCRVUBtKFyx3d13cpA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "82ae0de3-556d-4ca7-9217-0b9a22952cf4",
+                            SecurityStamp = "dbc2e1f1-b048-4a4a-8ef3-bcddd757033a",
                             TwoFactorEnabled = false,
                             UserName = "EveDavis"
                         });

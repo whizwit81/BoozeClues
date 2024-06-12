@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BoozeClues.Migrations
 {
     [DbContext(typeof(BoozeCluesDbContext))]
-    [Migration("20240611201844_initialcreate")]
-    partial class initialcreate
+    [Migration("20240612153307_RoleUpdate")]
+    partial class RoleUpdate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,9 +40,6 @@ namespace BoozeClues.Migrations
                     b.Property<int>("GlassTypeId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("IngredientId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Instructions")
                         .IsRequired()
                         .HasColumnType("text");
@@ -57,8 +54,6 @@ namespace BoozeClues.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("GlassTypeId");
-
-                    b.HasIndex("IngredientId");
 
                     b.HasIndex("UserProfileId");
 
@@ -826,6 +821,21 @@ namespace BoozeClues.Migrations
                         });
                 });
 
+            modelBuilder.Entity("CocktailRecipeIngredient", b =>
+                {
+                    b.Property<int>("CocktailRecipesId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("IngredientsId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("CocktailRecipesId", "IngredientsId");
+
+                    b.HasIndex("IngredientsId");
+
+                    b.ToTable("CocktailRecipeIngredient");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -953,13 +963,13 @@ namespace BoozeClues.Migrations
                         {
                             Id = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b2211a27-dcd6-494a-a743-2f0fe1b44291",
+                            ConcurrencyStamp = "6a71df32-87b8-46a4-be6a-292225bab070",
                             Email = "admina@strator.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEON2URxf+pU9dlS5+aFh54vnhcSk1JXQMlnkvr9RA+7kfrq/BRGYTQvXQNpWFeVZsw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENYa5gpBAag587EWHukfaoxU8X4DzPWCKWwKDfN9kV71nkzsPgHqNW05b3ChDFw87w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3904f633-f09d-404a-9bc1-f6945fceba09",
+                            SecurityStamp = "62898137-4241-4fa7-b6a4-04f46547be40",
                             TwoFactorEnabled = false,
                             UserName = "Administrator"
                         },
@@ -967,13 +977,13 @@ namespace BoozeClues.Migrations
                         {
                             Id = "d8d76512-74f1-43bb-b1fd-87d3a8aa36df",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ceb45eba-2f2f-4f99-acf4-eb57788bf3c1",
+                            ConcurrencyStamp = "2b1806cb-ebd2-4f3e-a48b-acb312ec1140",
                             Email = "john@doe.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEFzBr6/etR099WjHPh5MJ1hk9PuqoETiAccv1HWWtzWSCD/o/PX4jvxllghgKlv38A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEdiRPrzrUkbwPJAKIbqOOctAwzuJUb+jiqlDru92/cPakhhjfkeDx5UjhjfPXVh5w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a3417d1f-8645-4fd4-bf08-acf917b5a869",
+                            SecurityStamp = "81064076-ba9f-404d-92ab-a72f36d0ec33",
                             TwoFactorEnabled = false,
                             UserName = "JohnDoe"
                         },
@@ -981,13 +991,13 @@ namespace BoozeClues.Migrations
                         {
                             Id = "a7d21fac-3b21-454a-a747-075f072d0cf3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bcd51cda-41e7-4fdb-ac7f-86d26c92f25b",
+                            ConcurrencyStamp = "c3f5f1aa-de1d-4735-a52b-5b6e4a0883c5",
                             Email = "jane@smith.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEFRrhJB3aX+zpXLZYPBBZ9sjsNY+WhOyUOhvPudDo8timYygEHLmz/UqP2oJWkiEeQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFdjOOyUSqCKAx29eJ0aaE2vs4VlWPyAjxiPDq8KQ8Cb4e7eE8elHUyr1s9sO3TMhA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1fd6a009-58ca-4375-ba84-627b7d8fd6d5",
+                            SecurityStamp = "afafc10a-8354-4b9c-85b2-7acb449ddbb6",
                             TwoFactorEnabled = false,
                             UserName = "JaneSmith"
                         },
@@ -995,13 +1005,13 @@ namespace BoozeClues.Migrations
                         {
                             Id = "c806cfae-bda9-47c5-8473-dd52fd056a9b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e9964bec-be64-4692-aa41-5b37d5ba1a60",
+                            ConcurrencyStamp = "7f58f485-4c53-4725-8b7a-01cd5179418e",
                             Email = "alice@johnson.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEEOWNTTCZnreFcVbrRlB0XgBrPffy9Ei0pSRghp5CxxjfXK5Cefj64mXQyJ06bnjYg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPG4YZ+XzIJaVQ89g6rkO7RBvFJUnPbQ7OgaPoDlgDt2uQoKdFFNj21iYtz0M/yi9w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b0f7d2a9-24f8-492e-bbf4-f14fb0daab9e",
+                            SecurityStamp = "e75428fb-f7cc-4b86-aa91-cbb7f4d46ef0",
                             TwoFactorEnabled = false,
                             UserName = "AliceJohnson"
                         },
@@ -1009,13 +1019,13 @@ namespace BoozeClues.Migrations
                         {
                             Id = "9ce89d88-75da-4a80-9b0d-3fe58582b8e2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d78f29d3-56d9-4bb3-97f7-0d3d9a33d2a2",
+                            ConcurrencyStamp = "b67e1277-2d21-4ec0-adcb-22461d0fe5e4",
                             Email = "bob@williams.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEEIsgqpXW4XUeM3QyJP7UicHG7mkiBshrwTJDFJDBkX54WxSzGGFGfs1zWyS9gz8OQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEP86o5WLAUw8TgkuXcbVEVJYHjtBJCJNudDsM4owWc7GYrBwHtuWjtjID/EpIlBYDA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ce6b62bc-5b1b-4e0f-ac6b-f1549f010c00",
+                            SecurityStamp = "75d83b2d-29d2-4581-b89e-6f4c97c2c6cb",
                             TwoFactorEnabled = false,
                             UserName = "BobWilliams"
                         },
@@ -1023,13 +1033,13 @@ namespace BoozeClues.Migrations
                         {
                             Id = "d224a03d-bf0c-4a05-b728-e3521e45d74d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "97c693d3-0521-4562-9895-b69417aa0130",
+                            ConcurrencyStamp = "01b43e67-ea9d-4438-946d-bf756787af85",
                             Email = "eve@davis.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEEtTO7mh80lb8OA61EO0ow5dYmyLlb20Z7MB/u3ZT9LzkexN8t7IpWSiLy//g4Utbw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMnCHE3faQyMrf76DblgaudrrGaOvPeeLFr7GNJAjRTH6RJd0xpXF9geQUJbndDmHg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "33433f0d-d890-4c92-af3e-6a17a159c1cf",
+                            SecurityStamp = "cc094c02-2acd-4a96-b039-2fe2cf65bb11",
                             TwoFactorEnabled = false,
                             UserName = "EveDavis"
                         });
@@ -1136,10 +1146,6 @@ namespace BoozeClues.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BoozeClues.Models.Ingredient", null)
-                        .WithMany("CocktailRecipes")
-                        .HasForeignKey("IngredientId");
-
                     b.HasOne("BoozeClues.Models.UserProfile", "UserProfile")
                         .WithMany("CocktailRecipes")
                         .HasForeignKey("UserProfileId")
@@ -1179,6 +1185,21 @@ namespace BoozeClues.Migrations
                         .IsRequired();
 
                     b.Navigation("IdentityUser");
+                });
+
+            modelBuilder.Entity("CocktailRecipeIngredient", b =>
+                {
+                    b.HasOne("BoozeClues.Models.CocktailRecipe", null)
+                        .WithMany()
+                        .HasForeignKey("CocktailRecipesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BoozeClues.Models.Ingredient", null)
+                        .WithMany()
+                        .HasForeignKey("IngredientsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1240,11 +1261,6 @@ namespace BoozeClues.Migrations
             modelBuilder.Entity("BoozeClues.Models.GlassType", b =>
                 {
                     b.Navigation("CocktailRecipe");
-                });
-
-            modelBuilder.Entity("BoozeClues.Models.Ingredient", b =>
-                {
-                    b.Navigation("CocktailRecipes");
                 });
 
             modelBuilder.Entity("BoozeClues.Models.UserProfile", b =>

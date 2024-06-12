@@ -14,7 +14,8 @@ public class Registration
     public string FirstName { get; set; }
     [Required]
     public string LastName { get; set; }
-    [DataType(DataType.Url)]
-    public IFormFile ImageLocation { get; set; }
+
+    // [DataType(DataType.Url)]
+    // public IFormFile ImageLocation { get; set; }
 
 }

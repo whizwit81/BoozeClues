@@ -49,4 +49,42 @@ public class CocktailRecipeController : ControllerBase
 
         return Ok(recipeDtos);
     }
+
+    [HttpGet("{id}")]
+public IActionResult GetRecipeById(int id)
+{
+    var recipe = _dbContext.CocktailRecipes
+        .Include(cr => cr.GlassType)
+        .Include(cr => cr.RecipeIngredients)
+            .ThenInclude(ri => ri.Ingredient)
+        .Include(cr => cr.UserProfile)
+        .SingleOrDefault(cr => cr.Id == id);
+
+    if (recipe == null)
+    {
+        return NotFound();
+    }
+
+    var recipeDto = new CocktailRecipeDTO
+    {
+        Id = recipe.Id,
+        Name = recipe.Name,
+        Description = recipe.Description,
+        Instructions = recipe.Instructions,
+        GlassType = recipe.GlassType.Name,
+        Ingredients = recipe.RecipeIngredients.Select(ri => new IngredientDTO
+        {
+            Id = ri.Ingredient.Id,
+            Name = ri.Ingredient.Name,
+            Quantity = ri.Quantity,
+            IsAlcoholic = ri.Ingredient.IsAlcoholic
+        }).ToList(),
+        UserProfileId = recipe.UserProfileId,
+        UserProfile = recipe.UserProfile.FullName,
+        // ImageUrl = recipe.ImageUrl
+    };
+
+    return Ok(recipeDto);
+}
+
 }

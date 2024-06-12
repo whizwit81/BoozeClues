@@ -16,6 +16,7 @@ public class CocktailRecipeDTO
 
     public string UserProfile { get; set; }
     public string GlassType { get; set; }
+    // public string ImageUrl { get; set; }
     public List<RecipeIngredient> RecipeIngredients { get; set; }
     public List<IngredientDTO> Ingredients { get; set; }
 }

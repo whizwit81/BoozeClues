@@ -19,6 +19,8 @@ namespace BoozeClues.Models
         // [Required]
         [NotMapped]
         public string UserName { get; set; }
+        [NotMapped]
+        public List<string> Roles {get; set;}
 
         // [Required]
         [NotMapped]

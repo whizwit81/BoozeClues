@@ -3,6 +3,8 @@ import { AuthorizedRoute } from "./auth/AuthorizedRoute";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import { Home } from "../Home.jsx";
+import { ViewCocktailRecipes } from "./recipes/ViewRecipes.jsx";
+import RecipeDetails from "./recipes/RecipeDetails.jsx";
 
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
@@ -17,16 +19,20 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
             </AuthorizedRoute>
           }
           />
-        <Route
-          path="login"
-          element={<Login setLoggedInUser={setLoggedInUser} />}
-        />
-        <Route
-          path="register"
-          element={<Register setLoggedInUser={setLoggedInUser} />}
-        />
+          <Route
+            path="login"
+            element={<Login setLoggedInUser={setLoggedInUser} />}
+          />
+          <Route
+            path="register"
+            element={<Register setLoggedInUser={setLoggedInUser} />}
+          />
       </Route>
-      <Route path="*" element={<p>Whoops, nothing here...</p>} />
+      <Route path="/recipes"><Route index element={<AuthorizedRoute loggedInUser={loggedInUser}><ViewCocktailRecipes loggedInUser={loggedInUser} /></AuthorizedRoute>}/>
+      <Route path=":id"element={<AuthorizedRoute loggedInUser={loggedInUser}><RecipeDetails loggedInUser={loggedInUser} /></AuthorizedRoute>
+        }
+      />
+        </Route>
     </Routes>
   );
 }

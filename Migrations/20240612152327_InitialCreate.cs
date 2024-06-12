@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BoozeClues.Migrations
 {
     /// <inheritdoc />
-    public partial class initialcreate : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -217,8 +217,7 @@ namespace BoozeClues.Migrations
                     Name = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     Instructions = table.Column<string>(type: "text", nullable: false),
-                    GlassTypeId = table.Column<int>(type: "integer", nullable: false),
-                    IngredientId = table.Column<int>(type: "integer", nullable: true)
+                    GlassTypeId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -230,14 +229,33 @@ namespace BoozeClues.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CocktailRecipes_Ingredients_IngredientId",
-                        column: x => x.IngredientId,
-                        principalTable: "Ingredients",
-                        principalColumn: "Id");
-                    table.ForeignKey(
                         name: "FK_CocktailRecipes_UserProfiles_UserProfileId",
                         column: x => x.UserProfileId,
                         principalTable: "UserProfiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CocktailRecipeIngredient",
+                columns: table => new
+                {
+                    CocktailRecipesId = table.Column<int>(type: "integer", nullable: false),
+                    IngredientsId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CocktailRecipeIngredient", x => new { x.CocktailRecipesId, x.IngredientsId });
+                    table.ForeignKey(
+                        name: "FK_CocktailRecipeIngredient_CocktailRecipes_CocktailRecipesId",
+                        column: x => x.CocktailRecipesId,
+                        principalTable: "CocktailRecipes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CocktailRecipeIngredient_Ingredients_IngredientsId",
+                        column: x => x.IngredientsId,
+                        principalTable: "Ingredients",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -268,21 +286,16 @@ namespace BoozeClues.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", null, "Admin", "admin" });
-
-            migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "9ce89d88-75da-4a80-9b0d-3fe58582b8e2", 0, "d78f29d3-56d9-4bb3-97f7-0d3d9a33d2a2", "bob@williams.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEEIsgqpXW4XUeM3QyJP7UicHG7mkiBshrwTJDFJDBkX54WxSzGGFGfs1zWyS9gz8OQ==", null, false, "ce6b62bc-5b1b-4e0f-ac6b-f1549f010c00", false, "BobWilliams" },
-                    { "a7d21fac-3b21-454a-a747-075f072d0cf3", 0, "bcd51cda-41e7-4fdb-ac7f-86d26c92f25b", "jane@smith.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEFRrhJB3aX+zpXLZYPBBZ9sjsNY+WhOyUOhvPudDo8timYygEHLmz/UqP2oJWkiEeQ==", null, false, "1fd6a009-58ca-4375-ba84-627b7d8fd6d5", false, "JaneSmith" },
-                    { "c806cfae-bda9-47c5-8473-dd52fd056a9b", 0, "e9964bec-be64-4692-aa41-5b37d5ba1a60", "alice@johnson.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEEOWNTTCZnreFcVbrRlB0XgBrPffy9Ei0pSRghp5CxxjfXK5Cefj64mXQyJ06bnjYg==", null, false, "b0f7d2a9-24f8-492e-bbf4-f14fb0daab9e", false, "AliceJohnson" },
-                    { "d224a03d-bf0c-4a05-b728-e3521e45d74d", 0, "97c693d3-0521-4562-9895-b69417aa0130", "eve@davis.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEEtTO7mh80lb8OA61EO0ow5dYmyLlb20Z7MB/u3ZT9LzkexN8t7IpWSiLy//g4Utbw==", null, false, "33433f0d-d890-4c92-af3e-6a17a159c1cf", false, "EveDavis" },
-                    { "d8d76512-74f1-43bb-b1fd-87d3a8aa36df", 0, "ceb45eba-2f2f-4f99-acf4-eb57788bf3c1", "john@doe.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEFzBr6/etR099WjHPh5MJ1hk9PuqoETiAccv1HWWtzWSCD/o/PX4jvxllghgKlv38A==", null, false, "a3417d1f-8645-4fd4-bf08-acf917b5a869", false, "JohnDoe" },
-                    { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "b2211a27-dcd6-494a-a743-2f0fe1b44291", "admina@strator.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEON2URxf+pU9dlS5+aFh54vnhcSk1JXQMlnkvr9RA+7kfrq/BRGYTQvXQNpWFeVZsw==", null, false, "3904f633-f09d-404a-9bc1-f6945fceba09", false, "Administrator" }
+                    { "9ce89d88-75da-4a80-9b0d-3fe58582b8e2", 0, "06104720-d5cd-401c-be42-f504580ecc97", "bob@williams.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEESEQvEdOVopFAon67snERfmUiPdsZvar40ZRqX5pgN3WZb0b9xqHbe8n8kv/ezIsQ==", null, false, "2f600d79-80db-4cc4-a646-7a0d41e5bd4e", false, "BobWilliams" },
+                    { "a7d21fac-3b21-454a-a747-075f072d0cf3", 0, "dadf193e-147e-4cd0-b4b7-b06332531283", "jane@smith.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEChU5a0xr7Y2eKoF9OXBmYIUkwb+z3rl1sEn472D//5nabYX6mIxbXjzDt2hlac5Sg==", null, false, "b8450441-d119-432f-abe0-9e2a81694fa5", false, "JaneSmith" },
+                    { "c806cfae-bda9-47c5-8473-dd52fd056a9b", 0, "0ac0cbd7-06f1-42a2-8423-5e2f3451d288", "alice@johnson.com", false, false, null, null, null, "AQAAAAIAAYagAAAAECJgC1OmqrLonb4vn/p0P2MGUJqYxdV8KzMVcWmUmfYEEvOm1R0WCSXqVBIDHIbYzA==", null, false, "e7aec2a3-7220-4426-adaa-c11940e3ed08", false, "AliceJohnson" },
+                    { "d224a03d-bf0c-4a05-b728-e3521e45d74d", 0, "d2cb908f-cc69-4006-b1df-286e5a06575f", "eve@davis.com", false, false, null, null, null, "AQAAAAIAAYagAAAAECXjbvCrlG+79VZp/opxwDN3dYolcgwJ6eLhdXwtBVLftfwbemrJhViOsN5fP8hV6w==", null, false, "0c104569-e8c7-4ad4-9646-437a173ba4b4", false, "EveDavis" },
+                    { "d8d76512-74f1-43bb-b1fd-87d3a8aa36df", 0, "70bf67f7-839d-4ce3-8f33-6e31139af0fb", "john@doe.com", false, false, null, null, null, "AQAAAAIAAYagAAAAENBruaEJ8u9IROcuG5lv4lU9XOTY9HYjU3g1YfpGmKzPKsu6B4L27SOSV0Y1M5MvEQ==", null, false, "83eabbf7-8f39-4292-a70e-c04777649ab6", false, "JohnDoe" },
+                    { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "6941fcb7-b190-4b2e-a885-f8cdde77c904", "admina@strator.com", false, false, null, null, null, "AQAAAAIAAYagAAAAENuuzXz5Jx486ZNTgzCYMwr43u9b8r2GUy1nL1DC50NzxtHGiXaKwL6NNPXh4kx2dA==", null, false, "34bf48b6-58ee-48d8-a969-92a050f57adb", false, "Administrator" }
                 });
 
             migrationBuilder.InsertData(
@@ -332,15 +345,6 @@ namespace BoozeClues.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "AspNetUserRoles",
-                columns: new[] { "RoleId", "UserId" },
-                values: new object[,]
-                {
-                    { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "d8d76512-74f1-43bb-b1fd-87d3a8aa36df" },
-                    { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f" }
-                });
-
-            migrationBuilder.InsertData(
                 table: "UserProfiles",
                 columns: new[] { "Id", "FirstName", "IdentityUserId", "LastName" },
                 values: new object[,]
@@ -355,24 +359,24 @@ namespace BoozeClues.Migrations
 
             migrationBuilder.InsertData(
                 table: "CocktailRecipes",
-                columns: new[] { "Id", "Description", "GlassTypeId", "IngredientId", "Instructions", "Name", "UserProfileId" },
+                columns: new[] { "Id", "Description", "GlassTypeId", "Instructions", "Name", "UserProfileId" },
                 values: new object[,]
                 {
-                    { 1, "A refreshing tequila-based cocktail with lime juice and Cointreau.", 1, null, "Shake all ingredients with ice, then strain into a chilled glass.", "Margarita", 1 },
-                    { 2, "A classic cocktail made with bourbon, simple syrup, and bitters.", 3, null, "Stir ingredients with ice, then strain into a glass over ice.", "Old Fashioned", 2 },
-                    { 3, "A stylish cocktail featuring vodka, triple sec, lime juice, and cranberry juice.", 2, null, "Shake all ingredients with ice, then strain into a chilled glass.", "Cosmopolitan", 3 },
-                    { 4, "A minty and refreshing cocktail made with rum, lime juice, and soda water.", 1, null, "Muddle mint leaves with lime juice and sugar, then add rum and top up with soda water.", "Mojito", 4 },
-                    { 5, "A tropical cocktail made with rum, coconut cream, and pineapple juice.", 1, null, "Blend all ingredients with ice until smooth, then serve in a chilled glass.", "Pina Colada", 5 },
-                    { 6, "A classic cocktail made with gin and a touch of blue curacao.", 2, null, "Stir ingredients with ice, then strain into a chilled glass.", "Martini", 6 },
-                    { 7, "A fruity cocktail made with rum, maraschino liqueur, peach schnapps, and lemon juice.", 4, null, "Shake all ingredients with ice, then strain into a glass over ice.", "Mai Tai", 1 },
-                    { 8, "A spicy and refreshing cocktail made with vodka, lime juice, and ginger beer.", 1, null, "Combine ingredients in a glass with ice, then stir gently.", "Moscow Mule", 2 },
-                    { 9, "A tangy cocktail made with bourbon, simple syrup, and lemon juice.", 3, null, "Shake all ingredients with ice, then strain into a glass over ice.", "Whiskey Sour", 3 },
-                    { 10, "A sweet and sour cocktail made with rum, simple syrup, and lime juice.", 5, null, "Shake all ingredients with ice, then strain into a chilled glass.", "Daiquiri", 4 },
-                    { 11, "A colorful cocktail made with tequila, orange juice, and grenadine.", 1, null, "Pour tequila and orange juice into a glass with ice, then drizzle grenadine on top.", "Tequila Sunrise", 5 },
-                    { 12, "A strong cocktail made with vodka, gin, rum, triple sec, lime juice, and soda water.", 1, null, "Shake all ingredients except soda water with ice, then strain into a glass and top up with soda water.", "Long Island Iced Tea", 6 },
-                    { 13, "A savory cocktail made with vodka, tomato juice, and lemon juice.", 1, null, "Combine ingredients in a glass with ice, then stir gently.", "Bloody Mary", 1 },
-                    { 14, "A bitter and balanced cocktail made with gin, blue curacao, and bitters.", 2, null, "Stir ingredients with ice, then strain into a glass over ice.", "Negroni", 2 },
-                    { 15, "A vibrant cocktail made with vodka, blue curacao, and orange juice.", 2, null, "Shake all ingredients with ice, then strain into a chilled glass.", "Blue Lagoon", 3 }
+                    { 1, "A refreshing tequila-based cocktail with lime juice and Cointreau.", 1, "Shake all ingredients with ice, then strain into a chilled glass.", "Margarita", 1 },
+                    { 2, "A classic cocktail made with bourbon, simple syrup, and bitters.", 3, "Stir ingredients with ice, then strain into a glass over ice.", "Old Fashioned", 2 },
+                    { 3, "A stylish cocktail featuring vodka, triple sec, lime juice, and cranberry juice.", 2, "Shake all ingredients with ice, then strain into a chilled glass.", "Cosmopolitan", 3 },
+                    { 4, "A minty and refreshing cocktail made with rum, lime juice, and soda water.", 1, "Muddle mint leaves with lime juice and sugar, then add rum and top up with soda water.", "Mojito", 4 },
+                    { 5, "A tropical cocktail made with rum, coconut cream, and pineapple juice.", 1, "Blend all ingredients with ice until smooth, then serve in a chilled glass.", "Pina Colada", 5 },
+                    { 6, "A classic cocktail made with gin and a touch of blue curacao.", 2, "Stir ingredients with ice, then strain into a chilled glass.", "Martini", 6 },
+                    { 7, "A fruity cocktail made with rum, maraschino liqueur, peach schnapps, and lemon juice.", 4, "Shake all ingredients with ice, then strain into a glass over ice.", "Mai Tai", 1 },
+                    { 8, "A spicy and refreshing cocktail made with vodka, lime juice, and ginger beer.", 1, "Combine ingredients in a glass with ice, then stir gently.", "Moscow Mule", 2 },
+                    { 9, "A tangy cocktail made with bourbon, simple syrup, and lemon juice.", 3, "Shake all ingredients with ice, then strain into a glass over ice.", "Whiskey Sour", 3 },
+                    { 10, "A sweet and sour cocktail made with rum, simple syrup, and lime juice.", 5, "Shake all ingredients with ice, then strain into a chilled glass.", "Daiquiri", 4 },
+                    { 11, "A colorful cocktail made with tequila, orange juice, and grenadine.", 1, "Pour tequila and orange juice into a glass with ice, then drizzle grenadine on top.", "Tequila Sunrise", 5 },
+                    { 12, "A strong cocktail made with vodka, gin, rum, triple sec, lime juice, and soda water.", 1, "Shake all ingredients except soda water with ice, then strain into a glass and top up with soda water.", "Long Island Iced Tea", 6 },
+                    { 13, "A savory cocktail made with vodka, tomato juice, and lemon juice.", 1, "Combine ingredients in a glass with ice, then stir gently.", "Bloody Mary", 1 },
+                    { 14, "A bitter and balanced cocktail made with gin, blue curacao, and bitters.", 2, "Stir ingredients with ice, then strain into a glass over ice.", "Negroni", 2 },
+                    { 15, "A vibrant cocktail made with vodka, blue curacao, and orange juice.", 2, "Shake all ingredients with ice, then strain into a chilled glass.", "Blue Lagoon", 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -471,14 +475,14 @@ namespace BoozeClues.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_CocktailRecipeIngredient_IngredientsId",
+                table: "CocktailRecipeIngredient",
+                column: "IngredientsId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CocktailRecipes_GlassTypeId",
                 table: "CocktailRecipes",
                 column: "GlassTypeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CocktailRecipes_IngredientId",
-                table: "CocktailRecipes",
-                column: "IngredientId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CocktailRecipes_UserProfileId",
@@ -515,6 +519,9 @@ namespace BoozeClues.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "CocktailRecipeIngredient");
+
+            migrationBuilder.DropTable(
                 name: "RecipeIngredients");
 
             migrationBuilder.DropTable(
@@ -524,10 +531,10 @@ namespace BoozeClues.Migrations
                 name: "CocktailRecipes");
 
             migrationBuilder.DropTable(
-                name: "GlassTypes");
+                name: "Ingredients");
 
             migrationBuilder.DropTable(
-                name: "Ingredients");
+                name: "GlassTypes");
 
             migrationBuilder.DropTable(
                 name: "UserProfiles");
