@@ -23,7 +23,7 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
     <div>
       <Navbar color="light" light fixed="true" expand="lg">
         <NavbarBrand className="mr-auto" tag={RRNavLink} to="/">
-        🍸 BoozeClues 🍸
+          🍸 BoozeClues 🍸
         </NavbarBrand>
         {loggedInUser ? (
           <>
@@ -36,15 +36,10 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={RRNavLink} to={`/posts/user/${loggedInUser.id}`} >
+                  <NavLink tag={RRNavLink} to="/add">
                     Add Drink
                   </NavLink>
                 </NavItem>
-                {/* <NavItem>
-                  <NavLink tag={RRNavLink} to="/newpost">
-                   My Drinks
-                  </NavLink>
-                </NavItem> */}
               </Nav>
             </Collapse>
             <Button
@@ -55,7 +50,7 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                 logout().then(() => {
                   setLoggedInUser(null);
                   setOpen(false);
-                  navigate("/login")
+                  navigate("/login");
                 });
               }}
             >

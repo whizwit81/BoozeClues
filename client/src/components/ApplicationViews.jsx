@@ -5,6 +5,7 @@ import Register from "./auth/Register";
 import { Home } from "../Home.jsx";
 import { ViewCocktailRecipes } from "./recipes/ViewRecipes.jsx";
 import RecipeDetails from "./recipes/RecipeDetails.jsx";
+import AddNewRecipe from "./recipes/AddNewRecipe.jsx";
 
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
@@ -33,6 +34,14 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
         }
       />
         </Route>
+        <Route
+        path="/add"
+        element={
+          <AuthorizedRoute loggedInUser={loggedInUser}>
+            <AddNewRecipe loggedInUser={loggedInUser} />
+          </AuthorizedRoute>
+        }
+      />
     </Routes>
   );
 }

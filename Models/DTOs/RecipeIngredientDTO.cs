@@ -10,8 +10,7 @@ public class RecipeIngredientDTO
 {
     public int CocktailRecipeId { get; set; }
     public int IngredientId { get; set; }
-    public string Quantity { get; set; }
 
-    public CocktailRecipe CocktailRecipe { get; set; }
-    public Ingredient Ingredient { get; set; }
+    public CocktailRecipeDTO? CocktailRecipe { get; set; }
+    public IngredientDTO? Ingredient { get; set; }
 }
