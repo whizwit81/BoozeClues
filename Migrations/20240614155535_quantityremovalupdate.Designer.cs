@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BoozeClues.Migrations
 {
     [DbContext(typeof(BoozeCluesDbContext))]
-    [Migration("20240612153307_RoleUpdate")]
-    partial class RoleUpdate
+    [Migration("20240614155535_quantityremovalupdate")]
+    partial class quantityremovalupdate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -431,10 +431,6 @@ namespace BoozeClues.Migrations
                     b.Property<int>("IngredientId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Quantity")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("CocktailRecipeId", "IngredientId");
 
                     b.HasIndex("IngredientId");
@@ -445,308 +441,257 @@ namespace BoozeClues.Migrations
                         new
                         {
                             CocktailRecipeId = 1,
-                            IngredientId = 1,
-                            Quantity = "2 oz"
+                            IngredientId = 1
                         },
                         new
                         {
                             CocktailRecipeId = 1,
-                            IngredientId = 2,
-                            Quantity = "1 oz"
+                            IngredientId = 2
                         },
                         new
                         {
                             CocktailRecipeId = 1,
-                            IngredientId = 3,
-                            Quantity = "1 oz"
+                            IngredientId = 3
                         },
                         new
                         {
                             CocktailRecipeId = 2,
-                            IngredientId = 4,
-                            Quantity = "2 oz"
+                            IngredientId = 4
                         },
                         new
                         {
                             CocktailRecipeId = 2,
-                            IngredientId = 5,
-                            Quantity = "0.5 oz"
+                            IngredientId = 5
                         },
                         new
                         {
                             CocktailRecipeId = 2,
-                            IngredientId = 15,
-                            Quantity = "2 dashes"
+                            IngredientId = 15
                         },
                         new
                         {
                             CocktailRecipeId = 3,
-                            IngredientId = 6,
-                            Quantity = "1.5 oz"
+                            IngredientId = 6
                         },
                         new
                         {
                             CocktailRecipeId = 3,
-                            IngredientId = 9,
-                            Quantity = "1 oz"
+                            IngredientId = 9
                         },
                         new
                         {
                             CocktailRecipeId = 3,
-                            IngredientId = 2,
-                            Quantity = "0.5 oz"
+                            IngredientId = 2
                         },
                         new
                         {
                             CocktailRecipeId = 3,
-                            IngredientId = 11,
-                            Quantity = "0.5 oz"
+                            IngredientId = 11
                         },
                         new
                         {
                             CocktailRecipeId = 4,
-                            IngredientId = 8,
-                            Quantity = "1.5 oz"
+                            IngredientId = 8
                         },
                         new
                         {
                             CocktailRecipeId = 4,
-                            IngredientId = 5,
-                            Quantity = "1 oz"
+                            IngredientId = 5
                         },
                         new
                         {
                             CocktailRecipeId = 4,
-                            IngredientId = 2,
-                            Quantity = "1 oz"
+                            IngredientId = 2
                         },
                         new
                         {
                             CocktailRecipeId = 4,
-                            IngredientId = 14,
-                            Quantity = "10 leaves"
+                            IngredientId = 14
                         },
                         new
                         {
                             CocktailRecipeId = 4,
-                            IngredientId = 16,
-                            Quantity = "Top up"
+                            IngredientId = 16
                         },
                         new
                         {
                             CocktailRecipeId = 5,
-                            IngredientId = 8,
-                            Quantity = "2 oz"
+                            IngredientId = 8
                         },
                         new
                         {
                             CocktailRecipeId = 5,
-                            IngredientId = 25,
-                            Quantity = "1 oz"
+                            IngredientId = 25
                         },
                         new
                         {
                             CocktailRecipeId = 5,
-                            IngredientId = 12,
-                            Quantity = "1 oz"
+                            IngredientId = 12
                         },
                         new
                         {
                             CocktailRecipeId = 6,
-                            IngredientId = 7,
-                            Quantity = "2 oz"
+                            IngredientId = 7
                         },
                         new
                         {
                             CocktailRecipeId = 6,
-                            IngredientId = 22,
-                            Quantity = "0.5 oz"
+                            IngredientId = 22
                         },
                         new
                         {
                             CocktailRecipeId = 7,
-                            IngredientId = 8,
-                            Quantity = "1 oz"
+                            IngredientId = 8
                         },
                         new
                         {
                             CocktailRecipeId = 7,
-                            IngredientId = 19,
-                            Quantity = "0.5 oz"
+                            IngredientId = 19
                         },
                         new
                         {
                             CocktailRecipeId = 7,
-                            IngredientId = 20,
-                            Quantity = "0.5 oz"
+                            IngredientId = 20
                         },
                         new
                         {
                             CocktailRecipeId = 7,
-                            IngredientId = 18,
-                            Quantity = "0.5 oz"
+                            IngredientId = 18
                         },
                         new
                         {
                             CocktailRecipeId = 8,
-                            IngredientId = 6,
-                            Quantity = "2 oz"
+                            IngredientId = 6
                         },
                         new
                         {
                             CocktailRecipeId = 8,
-                            IngredientId = 2,
-                            Quantity = "0.5 oz"
+                            IngredientId = 2
                         },
                         new
                         {
                             CocktailRecipeId = 8,
-                            IngredientId = 13,
-                            Quantity = "Top up"
+                            IngredientId = 13
                         },
                         new
                         {
                             CocktailRecipeId = 9,
-                            IngredientId = 4,
-                            Quantity = "2 oz"
+                            IngredientId = 4
                         },
                         new
                         {
                             CocktailRecipeId = 9,
-                            IngredientId = 5,
-                            Quantity = "0.75 oz"
+                            IngredientId = 5
                         },
                         new
                         {
                             CocktailRecipeId = 9,
-                            IngredientId = 18,
-                            Quantity = "0.75 oz"
+                            IngredientId = 18
                         },
                         new
                         {
                             CocktailRecipeId = 10,
-                            IngredientId = 8,
-                            Quantity = "2 oz"
+                            IngredientId = 8
                         },
                         new
                         {
                             CocktailRecipeId = 10,
-                            IngredientId = 5,
-                            Quantity = "0.75 oz"
+                            IngredientId = 5
                         },
                         new
                         {
                             CocktailRecipeId = 10,
-                            IngredientId = 2,
-                            Quantity = "0.75 oz"
+                            IngredientId = 2
                         },
                         new
                         {
                             CocktailRecipeId = 11,
-                            IngredientId = 1,
-                            Quantity = "2 oz"
+                            IngredientId = 1
                         },
                         new
                         {
                             CocktailRecipeId = 11,
-                            IngredientId = 10,
-                            Quantity = "4 oz"
+                            IngredientId = 10
                         },
                         new
                         {
                             CocktailRecipeId = 11,
-                            IngredientId = 21,
-                            Quantity = "0.5 oz"
+                            IngredientId = 21
                         },
                         new
                         {
                             CocktailRecipeId = 12,
-                            IngredientId = 6,
-                            Quantity = "0.5 oz"
+                            IngredientId = 6
                         },
                         new
                         {
                             CocktailRecipeId = 12,
-                            IngredientId = 7,
-                            Quantity = "0.5 oz"
+                            IngredientId = 7
                         },
                         new
                         {
                             CocktailRecipeId = 12,
-                            IngredientId = 8,
-                            Quantity = "0.5 oz"
+                            IngredientId = 8
                         },
                         new
                         {
                             CocktailRecipeId = 12,
-                            IngredientId = 9,
-                            Quantity = "0.5 oz"
+                            IngredientId = 9
                         },
                         new
                         {
                             CocktailRecipeId = 12,
-                            IngredientId = 2,
-                            Quantity = "0.75 oz"
+                            IngredientId = 2
                         },
                         new
                         {
                             CocktailRecipeId = 12,
-                            IngredientId = 16,
-                            Quantity = "Top up"
+                            IngredientId = 16
                         },
                         new
                         {
                             CocktailRecipeId = 13,
-                            IngredientId = 6,
-                            Quantity = "2 oz"
+                            IngredientId = 6
                         },
                         new
                         {
                             CocktailRecipeId = 13,
-                            IngredientId = 10,
-                            Quantity = "4 oz"
+                            IngredientId = 10
                         },
                         new
                         {
                             CocktailRecipeId = 13,
-                            IngredientId = 18,
-                            Quantity = "0.5 oz"
+                            IngredientId = 18
                         },
                         new
                         {
                             CocktailRecipeId = 14,
-                            IngredientId = 7,
-                            Quantity = "1 oz"
+                            IngredientId = 7
                         },
                         new
                         {
                             CocktailRecipeId = 14,
-                            IngredientId = 22,
-                            Quantity = "1 oz"
+                            IngredientId = 22
                         },
                         new
                         {
                             CocktailRecipeId = 14,
-                            IngredientId = 15,
-                            Quantity = "1 oz"
+                            IngredientId = 15
                         },
                         new
                         {
                             CocktailRecipeId = 15,
-                            IngredientId = 6,
-                            Quantity = "1.5 oz"
+                            IngredientId = 6
                         },
                         new
                         {
                             CocktailRecipeId = 15,
-                            IngredientId = 22,
-                            Quantity = "1 oz"
+                            IngredientId = 22
                         },
                         new
                         {
                             CocktailRecipeId = 15,
-                            IngredientId = 10,
-                            Quantity = "Top up"
+                            IngredientId = 10
                         });
                 });
 
@@ -963,13 +908,13 @@ namespace BoozeClues.Migrations
                         {
                             Id = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6a71df32-87b8-46a4-be6a-292225bab070",
+                            ConcurrencyStamp = "0249953c-d42a-4567-a839-cda3fdd66d78",
                             Email = "admina@strator.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAENYa5gpBAag587EWHukfaoxU8X4DzPWCKWwKDfN9kV71nkzsPgHqNW05b3ChDFw87w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOdOyAo1E6wQ/r389lwLM1yy+A+APdy1ksL+je2Jp3Px6XErVj1ycRcMcICdRoSnlQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "62898137-4241-4fa7-b6a4-04f46547be40",
+                            SecurityStamp = "b97c33fe-ebde-4a50-a25e-01922177087d",
                             TwoFactorEnabled = false,
                             UserName = "Administrator"
                         },
@@ -977,13 +922,13 @@ namespace BoozeClues.Migrations
                         {
                             Id = "d8d76512-74f1-43bb-b1fd-87d3a8aa36df",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2b1806cb-ebd2-4f3e-a48b-acb312ec1140",
+                            ConcurrencyStamp = "9f6ea1a9-b0e2-4d51-9c93-5c65f7815a3e",
                             Email = "john@doe.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEEdiRPrzrUkbwPJAKIbqOOctAwzuJUb+jiqlDru92/cPakhhjfkeDx5UjhjfPXVh5w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOTtgrD7hCS8pyA/N++tUKPkBV2Xyqq9YokWcB524u3AZwBcGNmh5N89UnYmmYrNnQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "81064076-ba9f-404d-92ab-a72f36d0ec33",
+                            SecurityStamp = "ccc63b16-3195-447a-b9c1-fa4ec41ab2ff",
                             TwoFactorEnabled = false,
                             UserName = "JohnDoe"
                         },
@@ -991,13 +936,13 @@ namespace BoozeClues.Migrations
                         {
                             Id = "a7d21fac-3b21-454a-a747-075f072d0cf3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c3f5f1aa-de1d-4735-a52b-5b6e4a0883c5",
+                            ConcurrencyStamp = "b8771d5d-3bc6-4afd-942f-60b8fb6d0940",
                             Email = "jane@smith.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEFdjOOyUSqCKAx29eJ0aaE2vs4VlWPyAjxiPDq8KQ8Cb4e7eE8elHUyr1s9sO3TMhA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEImffq9rXTq1/0UtSzFRGH0s8aZYAdYvBAhVRvqlhF179fZ/wRiQHiyzZCOszuSFJA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "afafc10a-8354-4b9c-85b2-7acb449ddbb6",
+                            SecurityStamp = "bfc5523f-8982-4602-91b5-39f4f12746dc",
                             TwoFactorEnabled = false,
                             UserName = "JaneSmith"
                         },
@@ -1005,13 +950,13 @@ namespace BoozeClues.Migrations
                         {
                             Id = "c806cfae-bda9-47c5-8473-dd52fd056a9b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7f58f485-4c53-4725-8b7a-01cd5179418e",
+                            ConcurrencyStamp = "d618ef86-e8ee-45eb-98e6-97e29f126dee",
                             Email = "alice@johnson.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEPG4YZ+XzIJaVQ89g6rkO7RBvFJUnPbQ7OgaPoDlgDt2uQoKdFFNj21iYtz0M/yi9w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIRtVqHsk1RmP3H8G5keRaXUXtnQR0NRCKtxFho00eIFfmtvYBjiYebu/cFv9MOmXw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e75428fb-f7cc-4b86-aa91-cbb7f4d46ef0",
+                            SecurityStamp = "d6efcd01-d1cd-43d1-bd98-52323ee5186a",
                             TwoFactorEnabled = false,
                             UserName = "AliceJohnson"
                         },
@@ -1019,13 +964,13 @@ namespace BoozeClues.Migrations
                         {
                             Id = "9ce89d88-75da-4a80-9b0d-3fe58582b8e2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b67e1277-2d21-4ec0-adcb-22461d0fe5e4",
+                            ConcurrencyStamp = "c0de4f48-9774-4b4b-a966-c49fae333334",
                             Email = "bob@williams.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEP86o5WLAUw8TgkuXcbVEVJYHjtBJCJNudDsM4owWc7GYrBwHtuWjtjID/EpIlBYDA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMGr4AKYtU5wRoegu8/aZUshN7QCRpy1ZdKzbd0a0Vnh4CXLzRl7XLBEmLPP57RzmQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "75d83b2d-29d2-4581-b89e-6f4c97c2c6cb",
+                            SecurityStamp = "9f5a4b54-f913-43ec-8a00-768558cbf9ff",
                             TwoFactorEnabled = false,
                             UserName = "BobWilliams"
                         },
@@ -1033,13 +978,13 @@ namespace BoozeClues.Migrations
                         {
                             Id = "d224a03d-bf0c-4a05-b728-e3521e45d74d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "01b43e67-ea9d-4438-946d-bf756787af85",
+                            ConcurrencyStamp = "3ba80660-af06-4090-a420-afff7dc65a7c",
                             Email = "eve@davis.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEMnCHE3faQyMrf76DblgaudrrGaOvPeeLFr7GNJAjRTH6RJd0xpXF9geQUJbndDmHg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFb610aysyFXaRl6TTkYuopYp0eP2V5PEqEalfwu/RqDbCdD3nWGbk3DZu7MsiEEAA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "cc094c02-2acd-4a96-b039-2fe2cf65bb11",
+                            SecurityStamp = "ee989eb1-1626-429c-91ef-4bef5a5a7666",
                             TwoFactorEnabled = false,
                             UserName = "EveDavis"
                         });

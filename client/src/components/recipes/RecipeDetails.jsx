@@ -32,7 +32,7 @@ const RecipeDetails = () => {
               <ListGroup>
                 {recipe.ingredients.map(ingredient => (
                   <ListGroupItem key={ingredient.id}>
-                    {ingredient.quantity} - {ingredient.name} ({ingredient.isAlcoholic ? 'Alcoholic' : 'Non-Alcoholic'})
+                    {ingredient.name} ({ingredient.isAlcoholic ? 'Alcoholic' : 'Non-Alcoholic'})
                   </ListGroupItem>
                 ))}
               </ListGroup>

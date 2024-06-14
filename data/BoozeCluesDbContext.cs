@@ -234,85 +234,85 @@ namespace BoozeClues.Data
 
                         modelBuilder.Entity<RecipeIngredient>().HasData(
                 // Margarita
-                new RecipeIngredient { CocktailRecipeId = 1, IngredientId = 1, Quantity = "2 oz" },
-                new RecipeIngredient { CocktailRecipeId = 1, IngredientId = 2, Quantity = "1 oz" },
-                new RecipeIngredient { CocktailRecipeId = 1, IngredientId = 3, Quantity = "1 oz" },
+                new RecipeIngredient { CocktailRecipeId = 1, IngredientId = 1},
+                new RecipeIngredient { CocktailRecipeId = 1, IngredientId = 2},
+                new RecipeIngredient { CocktailRecipeId = 1, IngredientId = 3},
 
                 // Old Fashioned
-                new RecipeIngredient { CocktailRecipeId = 2, IngredientId = 4, Quantity = "2 oz" },
-                new RecipeIngredient { CocktailRecipeId = 2, IngredientId = 5, Quantity = "0.5 oz" },
-                new RecipeIngredient { CocktailRecipeId = 2, IngredientId = 15, Quantity = "2 dashes" },
+                new RecipeIngredient { CocktailRecipeId = 2, IngredientId = 4},
+                new RecipeIngredient { CocktailRecipeId = 2, IngredientId = 5},
+                new RecipeIngredient { CocktailRecipeId = 2, IngredientId = 15},
 
                 // Cosmopolitan
-                new RecipeIngredient { CocktailRecipeId = 3, IngredientId = 6, Quantity = "1.5 oz" },
-                new RecipeIngredient { CocktailRecipeId = 3, IngredientId = 9, Quantity = "1 oz" },
-                new RecipeIngredient { CocktailRecipeId = 3, IngredientId = 2, Quantity = "0.5 oz" },
-                new RecipeIngredient { CocktailRecipeId = 3, IngredientId = 11, Quantity = "0.5 oz" },
+                new RecipeIngredient { CocktailRecipeId = 3, IngredientId = 6},
+                new RecipeIngredient { CocktailRecipeId = 3, IngredientId = 9},
+                new RecipeIngredient { CocktailRecipeId = 3, IngredientId = 2},
+                new RecipeIngredient { CocktailRecipeId = 3, IngredientId = 11},
 
                 // Mojito
-                new RecipeIngredient { CocktailRecipeId = 4, IngredientId = 8, Quantity = "1.5 oz" },
-                new RecipeIngredient { CocktailRecipeId = 4, IngredientId = 5, Quantity = "1 oz" },
-                new RecipeIngredient { CocktailRecipeId = 4, IngredientId = 2, Quantity = "1 oz" },
-                new RecipeIngredient { CocktailRecipeId = 4, IngredientId = 14, Quantity = "10 leaves" },
-                new RecipeIngredient { CocktailRecipeId = 4, IngredientId = 16, Quantity = "Top up" },
+                new RecipeIngredient { CocktailRecipeId = 4, IngredientId = 8},
+                new RecipeIngredient { CocktailRecipeId = 4, IngredientId = 5},
+                new RecipeIngredient { CocktailRecipeId = 4, IngredientId = 2},
+                new RecipeIngredient { CocktailRecipeId = 4, IngredientId = 14},
+                new RecipeIngredient { CocktailRecipeId = 4, IngredientId = 16},
 
                 // Pina Colada
-                new RecipeIngredient { CocktailRecipeId = 5, IngredientId = 8, Quantity = "2 oz" },
-                new RecipeIngredient { CocktailRecipeId = 5, IngredientId = 25, Quantity = "1 oz" },
-                new RecipeIngredient { CocktailRecipeId = 5, IngredientId = 12, Quantity = "1 oz" },
+                new RecipeIngredient { CocktailRecipeId = 5, IngredientId = 8},
+                new RecipeIngredient { CocktailRecipeId = 5, IngredientId = 25},
+                new RecipeIngredient { CocktailRecipeId = 5, IngredientId = 12},
 
                 // Martini
-                new RecipeIngredient { CocktailRecipeId = 6, IngredientId = 7, Quantity = "2 oz" },
-                new RecipeIngredient { CocktailRecipeId = 6, IngredientId = 22, Quantity = "0.5 oz" },
+                new RecipeIngredient { CocktailRecipeId = 6, IngredientId = 7},
+                new RecipeIngredient { CocktailRecipeId = 6, IngredientId = 22},
 
                 // Mai Tai
-                new RecipeIngredient { CocktailRecipeId = 7, IngredientId = 8, Quantity = "1 oz" },
-                new RecipeIngredient { CocktailRecipeId = 7, IngredientId = 19, Quantity = "0.5 oz" },
-                new RecipeIngredient { CocktailRecipeId = 7, IngredientId = 20, Quantity = "0.5 oz" },
-                new RecipeIngredient { CocktailRecipeId = 7, IngredientId = 18, Quantity = "0.5 oz" },
+                new RecipeIngredient { CocktailRecipeId = 7, IngredientId = 8},
+                new RecipeIngredient { CocktailRecipeId = 7, IngredientId = 19},
+                new RecipeIngredient { CocktailRecipeId = 7, IngredientId = 20},
+                new RecipeIngredient { CocktailRecipeId = 7, IngredientId = 18},
 
                 // Moscow Mule
-                new RecipeIngredient { CocktailRecipeId = 8, IngredientId = 6, Quantity = "2 oz" },
-                new RecipeIngredient { CocktailRecipeId = 8, IngredientId = 2, Quantity = "0.5 oz" },
-                new RecipeIngredient { CocktailRecipeId = 8, IngredientId = 13, Quantity = "Top up" },
+                new RecipeIngredient { CocktailRecipeId = 8, IngredientId = 6},
+                new RecipeIngredient { CocktailRecipeId = 8, IngredientId = 2},
+                new RecipeIngredient { CocktailRecipeId = 8, IngredientId = 13},
 
                 // Whiskey Sour
-                new RecipeIngredient { CocktailRecipeId = 9, IngredientId = 4, Quantity = "2 oz" },
-                new RecipeIngredient { CocktailRecipeId = 9, IngredientId = 5, Quantity = "0.75 oz" },
-                new RecipeIngredient { CocktailRecipeId = 9, IngredientId = 18, Quantity = "0.75 oz" },
+                new RecipeIngredient { CocktailRecipeId = 9, IngredientId = 4,},
+                new RecipeIngredient { CocktailRecipeId = 9, IngredientId = 5},
+                new RecipeIngredient { CocktailRecipeId = 9, IngredientId = 18},
 
                 // Daiquiri
-                new RecipeIngredient { CocktailRecipeId = 10, IngredientId = 8, Quantity = "2 oz" },
-                new RecipeIngredient { CocktailRecipeId = 10, IngredientId = 5, Quantity = "0.75 oz" },
-                new RecipeIngredient { CocktailRecipeId = 10, IngredientId = 2, Quantity = "0.75 oz" },
+                new RecipeIngredient { CocktailRecipeId = 10, IngredientId = 8,},
+                new RecipeIngredient { CocktailRecipeId = 10, IngredientId = 5},
+                new RecipeIngredient { CocktailRecipeId = 10, IngredientId = 2},
 
                 // Tequila Sunrise
-                new RecipeIngredient { CocktailRecipeId = 11, IngredientId = 1, Quantity = "2 oz" },
-                new RecipeIngredient { CocktailRecipeId = 11, IngredientId = 10, Quantity = "4 oz" },
-                new RecipeIngredient { CocktailRecipeId = 11, IngredientId = 21, Quantity = "0.5 oz" },
+                new RecipeIngredient { CocktailRecipeId = 11, IngredientId = 1,},
+                new RecipeIngredient { CocktailRecipeId = 11, IngredientId = 10},
+                new RecipeIngredient { CocktailRecipeId = 11, IngredientId = 21},
 
                 // Long Island Iced Tea
-                new RecipeIngredient { CocktailRecipeId = 12, IngredientId = 6, Quantity = "0.5 oz" },
-                new RecipeIngredient { CocktailRecipeId = 12, IngredientId = 7, Quantity = "0.5 oz" },
-                new RecipeIngredient { CocktailRecipeId = 12, IngredientId = 8, Quantity = "0.5 oz" },
-                new RecipeIngredient { CocktailRecipeId = 12, IngredientId = 9, Quantity = "0.5 oz" },
-                new RecipeIngredient { CocktailRecipeId = 12, IngredientId = 2, Quantity = "0.75 oz" },
-                new RecipeIngredient { CocktailRecipeId = 12, IngredientId = 16, Quantity = "Top up" },
+                new RecipeIngredient { CocktailRecipeId = 12, IngredientId = 6},
+                new RecipeIngredient { CocktailRecipeId = 12, IngredientId = 7},
+                new RecipeIngredient { CocktailRecipeId = 12, IngredientId = 8},
+                new RecipeIngredient { CocktailRecipeId = 12, IngredientId = 9},
+                new RecipeIngredient { CocktailRecipeId = 12, IngredientId = 2},
+                new RecipeIngredient { CocktailRecipeId = 12, IngredientId = 16},
 
                 // Bloody Mary
-                new RecipeIngredient { CocktailRecipeId = 13, IngredientId = 6, Quantity = "2 oz" },
-                new RecipeIngredient { CocktailRecipeId = 13, IngredientId = 10, Quantity = "4 oz" },
-                new RecipeIngredient { CocktailRecipeId = 13, IngredientId = 18, Quantity = "0.5 oz" },
+                new RecipeIngredient { CocktailRecipeId = 13, IngredientId = 6,},
+                new RecipeIngredient { CocktailRecipeId = 13, IngredientId = 10},
+                new RecipeIngredient { CocktailRecipeId = 13, IngredientId = 18},
 
                 // Negroni
-                new RecipeIngredient { CocktailRecipeId = 14, IngredientId = 7, Quantity = "1 oz" },
-                new RecipeIngredient { CocktailRecipeId = 14, IngredientId = 22, Quantity = "1 oz" },
-                new RecipeIngredient { CocktailRecipeId = 14, IngredientId = 15, Quantity = "1 oz" },
+                new RecipeIngredient { CocktailRecipeId = 14, IngredientId = 7},
+                new RecipeIngredient { CocktailRecipeId = 14, IngredientId = 22},
+                new RecipeIngredient { CocktailRecipeId = 14, IngredientId = 15},
 
                 // Blue Lagoon
-                new RecipeIngredient { CocktailRecipeId = 15, IngredientId = 6, Quantity = "1.5 oz" },
-                new RecipeIngredient { CocktailRecipeId = 15, IngredientId = 22, Quantity = "1 oz" },
-                new RecipeIngredient { CocktailRecipeId = 15, IngredientId = 10, Quantity = "Top up" }
+                new RecipeIngredient { CocktailRecipeId = 15, IngredientId = 6},
+                new RecipeIngredient { CocktailRecipeId = 15, IngredientId = 22},
+                new RecipeIngredient { CocktailRecipeId = 15, IngredientId = 10}
             );
 
         }

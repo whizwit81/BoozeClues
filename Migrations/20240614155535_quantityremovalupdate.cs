@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BoozeClues.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class quantityremovalupdate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -265,8 +265,7 @@ namespace BoozeClues.Migrations
                 columns: table => new
                 {
                     CocktailRecipeId = table.Column<int>(type: "integer", nullable: false),
-                    IngredientId = table.Column<int>(type: "integer", nullable: false),
-                    Quantity = table.Column<string>(type: "text", nullable: false)
+                    IngredientId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -286,16 +285,21 @@ namespace BoozeClues.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", null, "Admin", "admin" });
+
+            migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "9ce89d88-75da-4a80-9b0d-3fe58582b8e2", 0, "06104720-d5cd-401c-be42-f504580ecc97", "bob@williams.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEESEQvEdOVopFAon67snERfmUiPdsZvar40ZRqX5pgN3WZb0b9xqHbe8n8kv/ezIsQ==", null, false, "2f600d79-80db-4cc4-a646-7a0d41e5bd4e", false, "BobWilliams" },
-                    { "a7d21fac-3b21-454a-a747-075f072d0cf3", 0, "dadf193e-147e-4cd0-b4b7-b06332531283", "jane@smith.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEChU5a0xr7Y2eKoF9OXBmYIUkwb+z3rl1sEn472D//5nabYX6mIxbXjzDt2hlac5Sg==", null, false, "b8450441-d119-432f-abe0-9e2a81694fa5", false, "JaneSmith" },
-                    { "c806cfae-bda9-47c5-8473-dd52fd056a9b", 0, "0ac0cbd7-06f1-42a2-8423-5e2f3451d288", "alice@johnson.com", false, false, null, null, null, "AQAAAAIAAYagAAAAECJgC1OmqrLonb4vn/p0P2MGUJqYxdV8KzMVcWmUmfYEEvOm1R0WCSXqVBIDHIbYzA==", null, false, "e7aec2a3-7220-4426-adaa-c11940e3ed08", false, "AliceJohnson" },
-                    { "d224a03d-bf0c-4a05-b728-e3521e45d74d", 0, "d2cb908f-cc69-4006-b1df-286e5a06575f", "eve@davis.com", false, false, null, null, null, "AQAAAAIAAYagAAAAECXjbvCrlG+79VZp/opxwDN3dYolcgwJ6eLhdXwtBVLftfwbemrJhViOsN5fP8hV6w==", null, false, "0c104569-e8c7-4ad4-9646-437a173ba4b4", false, "EveDavis" },
-                    { "d8d76512-74f1-43bb-b1fd-87d3a8aa36df", 0, "70bf67f7-839d-4ce3-8f33-6e31139af0fb", "john@doe.com", false, false, null, null, null, "AQAAAAIAAYagAAAAENBruaEJ8u9IROcuG5lv4lU9XOTY9HYjU3g1YfpGmKzPKsu6B4L27SOSV0Y1M5MvEQ==", null, false, "83eabbf7-8f39-4292-a70e-c04777649ab6", false, "JohnDoe" },
-                    { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "6941fcb7-b190-4b2e-a885-f8cdde77c904", "admina@strator.com", false, false, null, null, null, "AQAAAAIAAYagAAAAENuuzXz5Jx486ZNTgzCYMwr43u9b8r2GUy1nL1DC50NzxtHGiXaKwL6NNPXh4kx2dA==", null, false, "34bf48b6-58ee-48d8-a969-92a050f57adb", false, "Administrator" }
+                    { "9ce89d88-75da-4a80-9b0d-3fe58582b8e2", 0, "c0de4f48-9774-4b4b-a966-c49fae333334", "bob@williams.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEMGr4AKYtU5wRoegu8/aZUshN7QCRpy1ZdKzbd0a0Vnh4CXLzRl7XLBEmLPP57RzmQ==", null, false, "9f5a4b54-f913-43ec-8a00-768558cbf9ff", false, "BobWilliams" },
+                    { "a7d21fac-3b21-454a-a747-075f072d0cf3", 0, "b8771d5d-3bc6-4afd-942f-60b8fb6d0940", "jane@smith.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEImffq9rXTq1/0UtSzFRGH0s8aZYAdYvBAhVRvqlhF179fZ/wRiQHiyzZCOszuSFJA==", null, false, "bfc5523f-8982-4602-91b5-39f4f12746dc", false, "JaneSmith" },
+                    { "c806cfae-bda9-47c5-8473-dd52fd056a9b", 0, "d618ef86-e8ee-45eb-98e6-97e29f126dee", "alice@johnson.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEIRtVqHsk1RmP3H8G5keRaXUXtnQR0NRCKtxFho00eIFfmtvYBjiYebu/cFv9MOmXw==", null, false, "d6efcd01-d1cd-43d1-bd98-52323ee5186a", false, "AliceJohnson" },
+                    { "d224a03d-bf0c-4a05-b728-e3521e45d74d", 0, "3ba80660-af06-4090-a420-afff7dc65a7c", "eve@davis.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEFb610aysyFXaRl6TTkYuopYp0eP2V5PEqEalfwu/RqDbCdD3nWGbk3DZu7MsiEEAA==", null, false, "ee989eb1-1626-429c-91ef-4bef5a5a7666", false, "EveDavis" },
+                    { "d8d76512-74f1-43bb-b1fd-87d3a8aa36df", 0, "9f6ea1a9-b0e2-4d51-9c93-5c65f7815a3e", "john@doe.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEOTtgrD7hCS8pyA/N++tUKPkBV2Xyqq9YokWcB524u3AZwBcGNmh5N89UnYmmYrNnQ==", null, false, "ccc63b16-3195-447a-b9c1-fa4ec41ab2ff", false, "JohnDoe" },
+                    { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "0249953c-d42a-4567-a839-cda3fdd66d78", "admina@strator.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEOdOyAo1E6wQ/r389lwLM1yy+A+APdy1ksL+je2Jp3Px6XErVj1ycRcMcICdRoSnlQ==", null, false, "b97c33fe-ebde-4a50-a25e-01922177087d", false, "Administrator" }
                 });
 
             migrationBuilder.InsertData(
@@ -345,6 +349,15 @@ namespace BoozeClues.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[,]
+                {
+                    { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "d8d76512-74f1-43bb-b1fd-87d3a8aa36df" },
+                    { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "UserProfiles",
                 columns: new[] { "Id", "FirstName", "IdentityUserId", "LastName" },
                 values: new object[,]
@@ -381,60 +394,60 @@ namespace BoozeClues.Migrations
 
             migrationBuilder.InsertData(
                 table: "RecipeIngredients",
-                columns: new[] { "CocktailRecipeId", "IngredientId", "Quantity" },
+                columns: new[] { "CocktailRecipeId", "IngredientId" },
                 values: new object[,]
                 {
-                    { 1, 1, "2 oz" },
-                    { 1, 2, "1 oz" },
-                    { 1, 3, "1 oz" },
-                    { 2, 4, "2 oz" },
-                    { 2, 5, "0.5 oz" },
-                    { 2, 15, "2 dashes" },
-                    { 3, 2, "0.5 oz" },
-                    { 3, 6, "1.5 oz" },
-                    { 3, 9, "1 oz" },
-                    { 3, 11, "0.5 oz" },
-                    { 4, 2, "1 oz" },
-                    { 4, 5, "1 oz" },
-                    { 4, 8, "1.5 oz" },
-                    { 4, 14, "10 leaves" },
-                    { 4, 16, "Top up" },
-                    { 5, 8, "2 oz" },
-                    { 5, 12, "1 oz" },
-                    { 5, 25, "1 oz" },
-                    { 6, 7, "2 oz" },
-                    { 6, 22, "0.5 oz" },
-                    { 7, 8, "1 oz" },
-                    { 7, 18, "0.5 oz" },
-                    { 7, 19, "0.5 oz" },
-                    { 7, 20, "0.5 oz" },
-                    { 8, 2, "0.5 oz" },
-                    { 8, 6, "2 oz" },
-                    { 8, 13, "Top up" },
-                    { 9, 4, "2 oz" },
-                    { 9, 5, "0.75 oz" },
-                    { 9, 18, "0.75 oz" },
-                    { 10, 2, "0.75 oz" },
-                    { 10, 5, "0.75 oz" },
-                    { 10, 8, "2 oz" },
-                    { 11, 1, "2 oz" },
-                    { 11, 10, "4 oz" },
-                    { 11, 21, "0.5 oz" },
-                    { 12, 2, "0.75 oz" },
-                    { 12, 6, "0.5 oz" },
-                    { 12, 7, "0.5 oz" },
-                    { 12, 8, "0.5 oz" },
-                    { 12, 9, "0.5 oz" },
-                    { 12, 16, "Top up" },
-                    { 13, 6, "2 oz" },
-                    { 13, 10, "4 oz" },
-                    { 13, 18, "0.5 oz" },
-                    { 14, 7, "1 oz" },
-                    { 14, 15, "1 oz" },
-                    { 14, 22, "1 oz" },
-                    { 15, 6, "1.5 oz" },
-                    { 15, 10, "Top up" },
-                    { 15, 22, "1 oz" }
+                    { 1, 1 },
+                    { 1, 2 },
+                    { 1, 3 },
+                    { 2, 4 },
+                    { 2, 5 },
+                    { 2, 15 },
+                    { 3, 2 },
+                    { 3, 6 },
+                    { 3, 9 },
+                    { 3, 11 },
+                    { 4, 2 },
+                    { 4, 5 },
+                    { 4, 8 },
+                    { 4, 14 },
+                    { 4, 16 },
+                    { 5, 8 },
+                    { 5, 12 },
+                    { 5, 25 },
+                    { 6, 7 },
+                    { 6, 22 },
+                    { 7, 8 },
+                    { 7, 18 },
+                    { 7, 19 },
+                    { 7, 20 },
+                    { 8, 2 },
+                    { 8, 6 },
+                    { 8, 13 },
+                    { 9, 4 },
+                    { 9, 5 },
+                    { 9, 18 },
+                    { 10, 2 },
+                    { 10, 5 },
+                    { 10, 8 },
+                    { 11, 1 },
+                    { 11, 10 },
+                    { 11, 21 },
+                    { 12, 2 },
+                    { 12, 6 },
+                    { 12, 7 },
+                    { 12, 8 },
+                    { 12, 9 },
+                    { 12, 16 },
+                    { 13, 6 },
+                    { 13, 10 },
+                    { 13, 18 },
+                    { 14, 7 },
+                    { 14, 15 },
+                    { 14, 22 },
+                    { 15, 6 },
+                    { 15, 10 },
+                    { 15, 22 }
                 });
 
             migrationBuilder.CreateIndex(

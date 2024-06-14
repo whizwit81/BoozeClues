@@ -36,23 +36,28 @@ public class CocktailRecipeController : ControllerBase
                 Name = cr.Name,
                 Description = cr.Description,
                 Instructions = cr.Instructions,
-                GlassType = cr.GlassType.Name,
+                GlassTypeId = cr.GlassTypeId,
                 Ingredients = cr
                     .RecipeIngredients.Select(ri => new IngredientDTO
                     {
                         Id = ri.Ingredient.Id,
                         Name = ri.Ingredient.Name,
-                        Quantity = ri.Quantity,
                         IsAlcoholic = ri.Ingredient.IsAlcoholic
                     })
                     .ToList(),
                 UserProfileId = cr.UserProfileId,
-                UserProfile = cr.UserProfile.FullName
+                UserProfile = new UserProfileDTO
+                {
+                    Id = cr.UserProfile.Id,
+                    FirstName = cr.UserProfile.FirstName,
+                    LastName = cr.UserProfile.LastName
+                }
             })
             .ToList();
 
         return Ok(recipeDtos);
     }
+
 
     [HttpGet("{id}")]
     public IActionResult GetRecipeById(int id)
@@ -69,63 +74,90 @@ public class CocktailRecipeController : ControllerBase
             return NotFound();
         }
 
-        var recipeDto = new CocktailRecipeDTO
+        var recipeDTO = new CocktailRecipeDTO
         {
             Id = recipe.Id,
             Name = recipe.Name,
             Description = recipe.Description,
             Instructions = recipe.Instructions,
-            GlassType = recipe.GlassType.Name,
-            Ingredients = recipe
-                .RecipeIngredients.Select(ri => new IngredientDTO
+            GlassTypeId = recipe.GlassTypeId,
+            GlassType = new GlassTypeDTO
+            {
+                Id = recipe.GlassType.Id,
+                Name = recipe.GlassType.Name
+            },
+            Ingredients = recipe.RecipeIngredients.Select(ri => new IngredientDTO
                 {
                     Id = ri.Ingredient.Id,
                     Name = ri.Ingredient.Name,
-                    Quantity = ri.Quantity,
                     IsAlcoholic = ri.Ingredient.IsAlcoholic
                 })
                 .ToList(),
             UserProfileId = recipe.UserProfileId,
-            UserProfile = recipe.UserProfile.FullName,
+            UserProfile = new UserProfileDTO
+                {
+                    Id = recipe.UserProfile.Id,
+                    FirstName = recipe.UserProfile.FirstName,
+                    LastName = recipe.UserProfile.LastName
+                }
             // ImageUrl = recipe.ImageUrl
         };
 
-        return Ok(recipeDto);
+        return Ok(recipeDTO);
     }
 
-    [HttpPost]
-    public IActionResult AddRecipe(CocktailRecipeDTO newRecipeDto)
-    {
-        if (newRecipeDto == null)
+    [HttpGet("alcoholic")]
+        public IActionResult GetAlcoholicIngredients()
         {
-            return BadRequest();
+            List<Ingredient> alcoholicIngredients = _dbContext.Ingredients
+                .Where(i => i.IsAlcoholic)
+                .ToList();
+
+            return Ok(alcoholicIngredients);
         }
 
-        int glassTypeId =
-            _dbContext.GlassTypes.FirstOrDefault(gt => gt.Name == newRecipeDto.GlassType)?.Id ?? 0;
+     [HttpGet("non-alcoholic")]
+        public IActionResult GetNonAlcoholicIngredients()
+        {
+            List<Ingredient> nonAlcoholicIngredients = _dbContext.Ingredients
+                .Where(i => !i.IsAlcoholic)
+                .ToList();
 
+            return Ok(nonAlcoholicIngredients);
+        }
+
+    [HttpPost]
+    public IActionResult AddRecipe(CreateRecipeDTO newRecipeDTO
+    )
+    {
+        if (newRecipeDTO == null)
+        {
+            return BadRequest("Recipe data is null");
+        }
+
+        
         CocktailRecipe newRecipe = new CocktailRecipe
         {
-            Name = newRecipeDto.Name,
-            Description = newRecipeDto.Description,
-            Instructions = newRecipeDto.Instructions,
-            GlassTypeId = glassTypeId,
-            UserProfileId = newRecipeDto.UserProfileId
+            Name = newRecipeDTO.Name,
+            Description = newRecipeDTO.Description,
+            Instructions = newRecipeDTO.Instructions,
+            GlassTypeId = newRecipeDTO.GlassTypeId,
+            UserProfileId = newRecipeDTO.UserProfileId
         };
 
         _dbContext.CocktailRecipes.Add(newRecipe);
         _dbContext.SaveChanges();
 
-        foreach (IngredientDTO ingredientDto in newRecipeDto.Ingredients)
+        foreach (int Ingredient in newRecipeDTO.Ingredients)
         {
             RecipeIngredient recipeIngredient = new RecipeIngredient
             {
                 CocktailRecipeId = newRecipe.Id,
-                IngredientId = ingredientDto.Id,
-                Quantity = ingredientDto.Quantity
+                IngredientId = Ingredient,
             };
 
             _dbContext.RecipeIngredients.Add(recipeIngredient);
+            
         }
 
         _dbContext.SaveChanges();

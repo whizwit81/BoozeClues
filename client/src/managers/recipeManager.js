@@ -7,3 +7,34 @@ export const getRecipes = () => {
 export const getRecipeById = (id) => {
     return fetch(`${_apiUrl}/${id}`).then((res) => res.json());
 };
+
+
+export const addRecipe = (newRecipe) => {
+    return fetch(_apiUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newRecipe)
+    })
+};
+
+export const getNonAlcoholicIngredients = () => {
+    return fetch(`${_apiUrl}/non-alcoholic`)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error('Failed to fetch non-alcoholic ingredients');
+        });
+};
+
+export const getAlcoholicIngredients = () => {
+    return fetch(`${_apiUrl}/alcoholic`)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error('Failed to fetch alcoholic ingredients');
+        });
+};
