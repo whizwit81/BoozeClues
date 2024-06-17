@@ -4,12 +4,13 @@ import { useNavigate } from "react-router-dom";
 import "./ViewRecipes.css"; 
 import { getRecipes } from "../../managers/recipeManager.js";
 
-export const ViewCocktailRecipes = (loggedInUser) => {
+export const ViewCocktailRecipes = ({loggedInUser}) => {
     const [recipes, setRecipes] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
         getRecipes().then(setRecipes);
+
     }, []);
 
     const handleDetails = (recipeId) => {
@@ -17,7 +18,7 @@ export const ViewCocktailRecipes = (loggedInUser) => {
     };
 
     const handleEdit = (recipeId) => {
-        navigate(`/editrecipe/${recipeId}`)
+        navigate(`/edit/${recipeId}`)
     };
 
     return (
@@ -27,11 +28,11 @@ export const ViewCocktailRecipes = (loggedInUser) => {
                 {recipes.map(recipe => (
                     <Col md="4" sm="6" xs="12" key={recipe.id} className="cocktail-recipe">
                         <Card>
-                            <CardBody className="d-flex justify-content-between align-items-center"> {/* <---- updated */}
+                            <CardBody className="d-flex justify-content-between align-items-center"> 
                                 <CardTitle tag="h3">{recipe.name}</CardTitle>
-                                {loggedInUser && recipe.userProfileId === loggedInUser.id && ( // <---- added
+                                {loggedInUser && recipe.userProfileId === loggedInUser.id && (
                                     <Button color="warning" size="sm" onClick={() => handleEdit(recipe.id)}>
-                                        <FaEdit />
+                                        Edit
                                     </Button>
                                 )}
                             </CardBody>

@@ -9,7 +9,7 @@ namespace BoozeClues.Models;
 
 public class CreateRecipeDTO
 {
-    public int Id { get; set; }
+    public int? Id { get; set; }
     
     public int UserProfileId { get; set; }
     public string Name { get; set; }

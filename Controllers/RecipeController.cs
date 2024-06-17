@@ -127,12 +127,11 @@ public class CocktailRecipeController : ControllerBase
         }
 
     [HttpPost]
-    public IActionResult AddRecipe(CreateRecipeDTO newRecipeDTO
-    )
+    public IActionResult AddRecipe([FromBody] CreateRecipeDTO newRecipeDTO)
     {
-        if (newRecipeDTO == null)
+        if (!ModelState.IsValid)
         {
-            return BadRequest("Recipe data is null");
+            return BadRequest(ModelState);
         }
 
         
@@ -143,6 +142,7 @@ public class CocktailRecipeController : ControllerBase
             Instructions = newRecipeDTO.Instructions,
             GlassTypeId = newRecipeDTO.GlassTypeId,
             UserProfileId = newRecipeDTO.UserProfileId
+            
         };
 
         _dbContext.CocktailRecipes.Add(newRecipe);
@@ -150,10 +150,14 @@ public class CocktailRecipeController : ControllerBase
 
         foreach (int Ingredient in newRecipeDTO.Ingredients)
         {
+            if(newRecipeDTO.Ingredients == null || !newRecipeDTO.Ingredients.Any())
+            {
+                return BadRequest("At lease one ingredient is required");
+            }
             RecipeIngredient recipeIngredient = new RecipeIngredient
             {
                 CocktailRecipeId = newRecipe.Id,
-                IngredientId = Ingredient,
+                IngredientId = Ingredient
             };
 
             _dbContext.RecipeIngredients.Add(recipeIngredient);
@@ -163,5 +167,55 @@ public class CocktailRecipeController : ControllerBase
         _dbContext.SaveChanges();
 
         return Ok();
+    }
+
+    [HttpPut("{id}")]
+    public IActionResult EditRecipe(int id, [FromBody] CreateRecipeDTO updatedRecipeDTO)
+    {
+        if(!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        var existingRecipe = _dbContext.CocktailRecipes.Include(cr =>cr.RecipeIngredients).FirstOrDefault(cr => cr.Id == id);
+        if (existingRecipe == null)
+        {
+            return NotFound("Recipe not found");
+        }
+
+        existingRecipe.Name = updatedRecipeDTO.Name;
+        existingRecipe.Description = updatedRecipeDTO.Description;
+        existingRecipe.Instructions = updatedRecipeDTO.Instructions;
+        existingRecipe.GlassTypeId = updatedRecipeDTO.GlassTypeId;
+        existingRecipe.UserProfileId = updatedRecipeDTO.UserProfileId;
+
+        _dbContext.Entry(existingRecipe).State = EntityState.Modified;
+
+        var existingIngredients = existingRecipe.RecipeIngredients.ToList();
+
+        foreach (var ingredient in existingIngredients)
+        {
+            _dbContext.RecipeIngredients.Remove(ingredient);
+        }
+
+        foreach ( int IngredientId in updatedRecipeDTO.Ingredients)
+        {
+            if (updatedRecipeDTO.Ingredients == null || !updatedRecipeDTO.Ingredients.Any())
+            {
+                return BadRequest("At least one ingredient is required");
+            }
+
+            RecipeIngredient recipeIngredient = new RecipeIngredient
+            {
+                CocktailRecipeId = existingRecipe.Id,
+                IngredientId = IngredientId,
+            };
+
+            _dbContext.RecipeIngredients.Add(recipeIngredient);
+        }
+
+            _dbContext.SaveChanges();
+
+            return Ok();
     }
 }
