@@ -19,6 +19,16 @@ export const addRecipe = (newRecipe) => {
     })
 };
 
+export const editRecipe = (id, updatedRecipe) => {
+    return fetch(`${_apiUrl}/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedRecipe)
+    });
+};
+
 export const getNonAlcoholicIngredients = () => {
     return fetch(`${_apiUrl}/non-alcoholic`)
         .then(response => {

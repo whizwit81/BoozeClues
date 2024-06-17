@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {Button,Card,CardBody,CardTitle,Form,FormGroup,Label,Input,Container,Row,Col,} from "reactstrap";
 import "./AddNewRecipe.css";
-import {getNonAlcoholicIngredients,getAlcoholicIngredients,addRecipe,} from "../../managers/recipeManager";
+import {getNonAlcoholicIngredients,getAlcoholicIngredients,addRecipe, getRecipeById, editRecipe} from "../../managers/recipeManager";
 import { getGlassTypes } from "../../managers/glassTypeManager.js";
 
-const AddNewRecipe = ({ loggedInUser }) => {
+const AddNewRecipe = ({ loggedInUser, editMode }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [instructions, setInstructions] = useState("");
@@ -18,12 +18,30 @@ const AddNewRecipe = ({ loggedInUser }) => {
   const [chosenGlassType, setChosenGlassType] = useState("");
   const [alcoholicQuantities, setAlcoholicQuantities] = useState({});
   const navigate = useNavigate();
+  const { id } = useParams();
 
   useEffect(() => {
     getNonAlcoholicIngredients().then(setNonAlcoholicIngredients);
     getAlcoholicIngredients().then(setAlcoholicIngredients);
     getGlassTypes().then(setGlassTypes);
-  }, []);
+
+    if(editMode)
+      {
+      getRecipeById(id).then((recipe) => {
+        setName(recipe.name)
+        setDescription(recipe.description)
+        setInstructions(recipe.instructions)
+        setChosenGlassType(recipe.glassTypeId)
+
+        const nonAlcoholicIds = recipe.ingredients.filter(ingredient => !ingredient.isAlcoholic).map(ingredient => ingredient.id);
+        const alcoholicIds = recipe.ingredients.filter(ingredient => ingredient.isAlcoholic).map(ingredient => ingredient.id)
+
+        setSelectedNonAlcoholic(nonAlcoholicIds);
+        setSelectedAlcoholic(alcoholicIds);
+      })
+      }
+  },[]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,23 +51,23 @@ const AddNewRecipe = ({ loggedInUser }) => {
       description: description,
       instructions: instructions,
       ingredients: [
-        ...selectedNonAlcoholic.map(id => ({id, quantity: '1 oz'})), //may need to remove - check and see how this looks.
-        ...selectedAlcoholic.map(id => ({id, quantity: alcoholicQuantities[id] || '1 oz'})) //may need to remove - check and see how this looks.
+        ...selectedNonAlcoholic.map(id => ({id, isAlcoholic: false})),
+        ...selectedAlcoholic.map(id => ({id, isAlcoholic: true}))
       ],
       userProfileId: loggedInUser.id,
       glassTypeId: chosenGlassType,
     };
+    console.log(newRecipe);
+
+    if(editMode)
+      {
+        await editRecipe(newRecipe);
+        navigate("/recipes");
+      }
 
     await addRecipe(newRecipe);
     navigate("/recipes");
   };
-
-//   const handleAddIngredient = () => {
-//     setAdditionalIngredients([
-//       ...additionalIngredients,
-//       { id: "", quantity: "1 oz" },
-//     ]);
-//   };
 
   const handleAddNonAlcoholic = () => {
         setSelectedNonAlcoholic([...selectedNonAlcoholic, '']);
@@ -77,19 +95,23 @@ const AddNewRecipe = ({ loggedInUser }) => {
       setSelectedAlcoholic(selectedIngredients);
   }
 
-  const handleQuantityChange = (ingredientId, quantity) => {
-    setAlcoholicQuantities({...alcoholicQuantities, [ingredientId]: quantity});
-  };
+  const handleCancel = () => {
+    navigate("/recipes");
+  }
+
+  // const handleQuantityChange = (ingredientId, quantity) => {
+  //   setAlcoholicQuantities({...alcoholicQuantities, [ingredientId]: quantity});
+  // };
 
   return (
     <Container className="add-new-recipe-container">
-      <h2 className="text-center">Add a New Cocktail!</h2>
+      {editMode ? <h2 className="text-center">Edit your cocktail</h2> : <h2 className="text-center">Add a New Cocktail!</h2>}
+      <Row>
+        <Col md="6">
       <Card className="add-new-recipe-card mx-auto">
-        <CardBody>
+        <CardBody className="d-flex flex-column align-items-center">
           <CardTitle tag="h4" className="text-center">New Cocktail Recipe</CardTitle>
           <Form onSubmit={handleSubmit}>
-            <Row>
-              <Col md="6">
                 <FormGroup>
                   <Label for="name">Name</Label>
                   <Input
@@ -169,42 +191,43 @@ const AddNewRecipe = ({ loggedInUser }) => {
                     Add Another Non-Alcoholic Ingredient
                   </Button>
                 </FormGroup>
-                </Col>
-            </Row>
-            <Button type="submit" color="primary" block>Add Cocktail</Button>
           </Form>
         </CardBody>
       </Card>
+      </Col>
+      <Col md="6">
       <Card className="add-new-recipe-card mx-auto mt-4">
         <CardBody>
             <CardTitle tag="h4" className="text-center">Alcoholic Ingredients</CardTitle>
             <FormGroup>
                 {alcoholicIngredients.map((ingredient) => (
-                    <Row key={ingredient.id} className="align-items-center mb-2">
-                        <Col md="8">
+                        <FormGroup check inline key={ingredient.id}>
                         <Label check>
-                            <Input
-                            type="checkbox"
-                            value={ingredient.id}
-                            onChange={() => {ingredientChange(ingredient.id)}}
-                            /> {''}
-                            {ingredient.name}
-                        </Label>
-                        </Col>
-                        <Col md="4">
                         <Input
-                        type="text"
-                        placeholder="Quantity (oz)"
-                        value={alcoholicQuantities[ingredient.id] || ''}
-                        onChange={(e) => handleQuantityChange(ingredient.id, e.target.value)}
-                        disabled={!selectedAlcoholic.includes(ingredient.id)}
-                        />
-                        </Col>
-                    </Row>
+                        type="checkbox"
+                        value={ingredient.id}
+                        checked={selectedAlcoholic.includes(ingredient.id)}
+                        onChange={() => {ingredientChange(ingredient.id)}}
+                        />{''}
+                        {ingredient.name}
+                        </Label>
+                    </FormGroup>
                 ))}
             </FormGroup>
         </CardBody>
       </Card>
+      </Col>
+      </Row>
+      <Row className="mt-4">
+        <Col className="d-flex justify-content center">
+        <Button type="submit" color="primary" block className="mx-2" onClick={handleSubmit}>
+          {editMode ? "Submit Edit" : "Add Cocktail"}
+          </Button>
+          <Button type="button" color="danger" className="mx-2" onClick={handleCancel}>
+              Cancel
+          </Button>
+        </Col>
+        </Row>
     </Container>
   );
 };

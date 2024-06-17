@@ -42,6 +42,11 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           </AuthorizedRoute>
         }
       />
+      <Route path="/edit"><Route index element={<AuthorizedRoute loggedInUser={loggedInUser}><RecipeDetails loggedInUser={loggedInUser} /></AuthorizedRoute>}/>
+      <Route path=":id"element={<AuthorizedRoute loggedInUser={loggedInUser}><AddNewRecipe editMode={true} loggedInUser={loggedInUser} /></AuthorizedRoute>
+        }
+      />
+      </Route>
     </Routes>
   );
 }
