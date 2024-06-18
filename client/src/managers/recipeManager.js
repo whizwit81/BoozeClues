@@ -48,3 +48,12 @@ export const getAlcoholicIngredients = () => {
             throw new Error('Failed to fetch alcoholic ingredients');
         });
 };
+
+export const deleteRecipe = (id) => {
+    return fetch(`${_apiUrl}/${id}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type" : "application/json",
+        }
+    });
+};

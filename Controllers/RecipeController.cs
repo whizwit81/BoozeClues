@@ -5,6 +5,7 @@ using BoozeClues.Models;
 using BoozeClues.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace BoozeClues.Controllers;
 
@@ -217,5 +218,20 @@ public class CocktailRecipeController : ControllerBase
             _dbContext.SaveChanges();
 
             return Ok();
+    }
+
+    [HttpDelete("{id}")]
+    public IActionResult Delete (int id)
+    {
+        CocktailRecipe deletedRecipe = _dbContext.CocktailRecipes.SingleOrDefault(cr => cr.Id == id);
+
+        if(deletedRecipe == null)
+        {
+            return NotFound("Recipe not found");
+        }
+
+        _dbContext.CocktailRecipes.Remove(deletedRecipe);
+        _dbContext.SaveChanges();
+        return NoContent();
     }
 }

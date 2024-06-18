@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { getRecipeById } from '../../managers/recipeManager';
-import { Card, CardBody, CardTitle, CardImg, Container, Row, Col, ListGroup, ListGroupItem } from 'reactstrap';
+import { useParams, useNavigate } from 'react-router-dom';
+import { deleteRecipe, getRecipeById, getRecipes } from '../../managers/recipeManager';
+import { Button,Card, CardBody, CardTitle, CardImg, Container, Row, Col, ListGroup, ListGroupItem } from 'reactstrap';
 import './RecipeDetails.css';
+import ConfirmDelete from '../../modals/ConfirmDelete.jsx';
 
-const RecipeDetails = () => {
+const RecipeDetails = ({loggedInUser}) => {
   const { id } = useParams();
   const [recipe, setRecipe] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [deleteRecipeById, setDeleteRecipeById] = useState(null);
+  const [userProfileId, setUserProfileId] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getRecipeById(id).then(setRecipe);
@@ -15,6 +20,22 @@ const RecipeDetails = () => {
   if (!recipe) {
     return <div>Loading...</div>;
   }
+
+  const toggleModal = () => {
+    setModalOpen(!modalOpen)
+  };
+
+  const handleDeleteModal = (id) => {
+    setDeleteRecipeById(id);
+    toggleModal();
+  }
+
+  const handleDeleteRecipe = () => {
+    deleteRecipe(deleteRecipeById).then(() => {
+      navigate('/recipes')
+
+        })
+  };
 
   return (
     <Container className="recipe-details-container">
@@ -39,7 +60,20 @@ const RecipeDetails = () => {
             </CardBody>
           </Col>
         </Row>
+            <CardBody className="d-flex justify-content-between align-items-center">
+                                {loggedInUser && recipe.userProfileId === loggedInUser.id && (
+                                    <Button color="danger" size="sm" onClick={() => handleDeleteModal(recipe.id)}>
+                                        Delete
+                                    </Button>
+                                )}
+                            </CardBody>
       </Card>
+      <ConfirmDelete
+      isOpen={modalOpen}
+      toggle={toggleModal}
+      confirmDelete={handleDeleteRecipe}
+      typeName={"recipe"}
+      />
     </Container>
   );
 };
