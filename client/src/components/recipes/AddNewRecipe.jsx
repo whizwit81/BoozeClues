@@ -1,8 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import {Button,Card,CardBody,CardTitle,Form,FormGroup,Label,Input,Container,Row,Col,} from "reactstrap";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardTitle,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Container,
+  Row,
+  Col,
+} from "reactstrap";
 import "./AddNewRecipe.css";
-import {getNonAlcoholicIngredients,getAlcoholicIngredients,addRecipe, getRecipeById, editRecipe} from "../../managers/recipeManager";
+import {
+  getNonAlcoholicIngredients,
+  getAlcoholicIngredients,
+  addRecipe,
+  getRecipeById,
+  editRecipe,
+} from "../../managers/recipeManager";
 import { getGlassTypes } from "../../managers/glassTypeManager.js";
 
 const AddNewRecipe = ({ loggedInUser, editMode }) => {
@@ -11,7 +29,7 @@ const AddNewRecipe = ({ loggedInUser, editMode }) => {
   const [instructions, setInstructions] = useState("");
   const [nonAlcoholicIngredients, setNonAlcoholicIngredients] = useState([]);
   const [alcoholicIngredients, setAlcoholicIngredients] = useState([]);
-  const [selectedNonAlcoholic, setSelectedNonAlcoholic] = useState(['']);
+  const [selectedNonAlcoholic, setSelectedNonAlcoholic] = useState([""]);
   const [selectedAlcoholic, setSelectedAlcoholic] = useState([]);
   const [chosenIngredients, setChosenIngredients] = useState([]);
   const [glassTypes, setGlassTypes] = useState([]);
@@ -25,23 +43,25 @@ const AddNewRecipe = ({ loggedInUser, editMode }) => {
     getAlcoholicIngredients().then(setAlcoholicIngredients);
     getGlassTypes().then(setGlassTypes);
 
-    if(editMode)
-      {
+    if (editMode) {
       getRecipeById(id).then((recipe) => {
-        setName(recipe.name)
-        setDescription(recipe.description)
-        setInstructions(recipe.instructions)
-        setChosenGlassType(recipe.glassTypeId)
+        setName(recipe.name);
+        setDescription(recipe.description);
+        setInstructions(recipe.instructions);
+        setChosenGlassType(recipe.glassTypeId);
 
-        const nonAlcoholicIds = recipe.ingredients.filter(ingredient => !ingredient.isAlcoholic).map(ingredient => ingredient.id);
-        const alcoholicIds = recipe.ingredients.filter(ingredient => ingredient.isAlcoholic).map(ingredient => ingredient.id)
+        const nonAlcoholicIds = recipe.ingredients
+          .filter((ingredient) => !ingredient.isAlcoholic)
+          .map((ingredient) => ingredient.id);
+        const alcoholicIds = recipe.ingredients
+          .filter((ingredient) => ingredient.isAlcoholic)
+          .map((ingredient) => ingredient.id);
 
         setSelectedNonAlcoholic(nonAlcoholicIds);
         setSelectedAlcoholic(alcoholicIds);
-      })
-      }
-  },[]);
-
+      });
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,53 +71,49 @@ const AddNewRecipe = ({ loggedInUser, editMode }) => {
       description: description,
       instructions: instructions,
       ingredients: [
-        ...selectedNonAlcoholic.map(id => ({id, isAlcoholic: false})),
-        ...selectedAlcoholic.map(id => ({id, isAlcoholic: true}))
+        ...selectedNonAlcoholic.map((id) => id),
+        ...selectedAlcoholic.map((id) => id),
       ],
       userProfileId: loggedInUser.id,
       glassTypeId: chosenGlassType,
     };
     console.log(newRecipe);
 
-    if(editMode)
-      {
-        await editRecipe(newRecipe);
-        navigate("/recipes");
-      }
-
-    await addRecipe(newRecipe);
-    navigate("/recipes");
+    if (editMode) {
+      await editRecipe(id, newRecipe);
+      navigate("/recipes");
+    } else {
+      await addRecipe(newRecipe);
+      navigate("/recipes");
+    }
   };
 
   const handleAddNonAlcoholic = () => {
-        setSelectedNonAlcoholic([...selectedNonAlcoholic, '']);
+    setSelectedNonAlcoholic([...selectedNonAlcoholic, ""]);
   };
 
   const handleIngredientChange = (index, value) => {
     const newNonAlcoholicIngredients = [...selectedNonAlcoholic];
     newNonAlcoholicIngredients[index] = parseInt(value);
     setSelectedNonAlcoholic(newNonAlcoholicIngredients);
-  }
+  };
 
   const ingredientChange = (ingredientId) => {
-      const selectedIngredients = [...selectedAlcoholic];
-      const index = selectedIngredients.indexOf(ingredientId)
+    const selectedIngredients = [...selectedAlcoholic];
+    const index = selectedIngredients.indexOf(ingredientId);
 
-      if(index === -1)
-          {
-              selectedIngredients.push(ingredientId)
-          }
-      else
-      {
-          selectedIngredients.splice(index, 1)
-      }
+    if (index === -1) {
+      selectedIngredients.push(ingredientId);
+    } else {
+      selectedIngredients.splice(index, 1);
+    }
 
-      setSelectedAlcoholic(selectedIngredients);
-  }
+    setSelectedAlcoholic(selectedIngredients);
+  };
 
   const handleCancel = () => {
     navigate("/recipes");
-  }
+  };
 
   // const handleQuantityChange = (ingredientId, quantity) => {
   //   setAlcoholicQuantities({...alcoholicQuantities, [ingredientId]: quantity});
@@ -105,13 +121,19 @@ const AddNewRecipe = ({ loggedInUser, editMode }) => {
 
   return (
     <Container className="add-new-recipe-container">
-      {editMode ? <h2 className="text-center">Edit your cocktail</h2> : <h2 className="text-center">Add a New Cocktail!</h2>}
+      {editMode ? (
+        <h2 className="text-center">Edit your cocktail</h2>
+      ) : (
+        <h2 className="text-center">Add a New Cocktail!</h2>
+      )}
       <Row>
         <Col md="6">
-      <Card className="add-new-recipe-card mx-auto">
-        <CardBody className="d-flex flex-column align-items-center">
-          <CardTitle tag="h4" className="text-center">New Cocktail Recipe</CardTitle>
-          <Form onSubmit={handleSubmit}>
+          <Card className="add-new-recipe-card mx-auto">
+            <CardBody className="d-flex flex-column align-items-center">
+              <CardTitle tag="h4" className="text-center">
+                New Cocktail Recipe
+              </CardTitle>
+              <Form onSubmit={handleSubmit}>
                 <FormGroup>
                   <Label for="name">Name</Label>
                   <Input
@@ -180,7 +202,7 @@ const AddNewRecipe = ({ loggedInUser, editMode }) => {
                       key={index}
                     >
                       <option value="">Select an ingredient</option>
-                      {nonAlcoholicIngredients.map(ingredient => (
+                      {nonAlcoholicIngredients.map((ingredient) => (
                         <option key={ingredient.id} value={ingredient.id}>
                           {ingredient.name}
                         </option>
@@ -191,43 +213,59 @@ const AddNewRecipe = ({ loggedInUser, editMode }) => {
                     Add Another Non-Alcoholic Ingredient
                   </Button>
                 </FormGroup>
-          </Form>
-        </CardBody>
-      </Card>
-      </Col>
-      <Col md="6">
-      <Card className="add-new-recipe-card mx-auto mt-4">
-        <CardBody>
-            <CardTitle tag="h4" className="text-center">Alcoholic Ingredients</CardTitle>
-            <FormGroup>
+              </Form>
+            </CardBody>
+          </Card>
+        </Col>
+        <Col md="6">
+          <Card className="add-new-recipe-card mx-auto mt-4">
+            <CardBody>
+              <CardTitle tag="h4" className="text-center">
+                Alcoholic Ingredients
+              </CardTitle>
+              <FormGroup>
                 {alcoholicIngredients.map((ingredient) => (
-                        <FormGroup check inline key={ingredient.id}>
-                        <Label check>
-                        <Input
+                  <FormGroup check inline key={ingredient.id}>
+                    <Label check>
+                      <Input
                         type="checkbox"
                         value={ingredient.id}
                         checked={selectedAlcoholic.includes(ingredient.id)}
-                        onChange={() => {ingredientChange(ingredient.id)}}
-                        />{''}
-                        {ingredient.name}
-                        </Label>
-                    </FormGroup>
+                        onChange={() => {
+                          ingredientChange(ingredient.id);
+                        }}
+                      />
+                      {""}
+                      {ingredient.name}
+                    </Label>
+                  </FormGroup>
                 ))}
-            </FormGroup>
-        </CardBody>
-      </Card>
-      </Col>
+              </FormGroup>
+            </CardBody>
+          </Card>
+        </Col>
       </Row>
       <Row className="mt-4">
         <Col className="d-flex justify-content center">
-        <Button type="submit" color="primary" block className="mx-2" onClick={handleSubmit}>
-          {editMode ? "Submit Edit" : "Add Cocktail"}
+          <Button
+            type="submit"
+            color="primary"
+            block
+            className="mx-2"
+            onClick={handleSubmit}
+          >
+            {editMode ? "Submit Edit" : "Add Cocktail"}
           </Button>
-          <Button type="button" color="danger" className="mx-2" onClick={handleCancel}>
-              Cancel
+          <Button
+            type="button"
+            color="danger"
+            className="mx-2"
+            onClick={handleCancel}
+          >
+            Cancel
           </Button>
         </Col>
-        </Row>
+      </Row>
     </Container>
   );
 };
