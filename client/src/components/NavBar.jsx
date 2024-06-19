@@ -12,6 +12,8 @@ import {
 } from "reactstrap";
 import { logout } from "../managers/authManager";
 import { useNavigate } from "react-router-dom";
+import React from "react";
+import '../App.css'
 
 export default function NavBar({ loggedInUser, setLoggedInUser }) {
   const [open, setOpen] = useState(false);
@@ -21,7 +23,7 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
 
   return (
     <div>
-      <Navbar color="light" light fixed="true" expand="lg">
+      <Navbar color="light" light className="fixed-navbar" fixed="true" expand="lg">
         <NavbarBrand className="mr-auto" tag={RRNavLink} to="/">
           🍸 BoozeClues 🍸
         </NavbarBrand>

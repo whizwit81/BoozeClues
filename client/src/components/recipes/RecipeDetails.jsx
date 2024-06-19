@@ -37,6 +37,10 @@ const RecipeDetails = ({loggedInUser}) => {
         })
   };
 
+  const handleEdit = (recipeId) => {
+    navigate(`/edit/${recipeId}`)
+};
+
   return (
     <Container className="recipe-details-container">
       <h2 className="text-center mb-4">{recipe.name}</h2>
@@ -64,6 +68,11 @@ const RecipeDetails = ({loggedInUser}) => {
                                 {loggedInUser && recipe.userProfileId === loggedInUser.id && (
                                     <Button color="danger" size="sm" onClick={() => handleDeleteModal(recipe.id)}>
                                         Delete
+                                    </Button>
+                                )}
+                                {loggedInUser && recipe.userProfileId === loggedInUser.id && (
+                                    <Button color="warning" size="sm" onClick={() => handleEdit(recipe.id)}>
+                                        Edit
                                     </Button>
                                 )}
                             </CardBody>
