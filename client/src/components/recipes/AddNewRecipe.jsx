@@ -119,6 +119,12 @@ const AddNewRecipe = ({ loggedInUser, editMode }) => {
   //   setAlcoholicQuantities({...alcoholicQuantities, [ingredientId]: quantity});
   // };
 
+  const handleDeleteNonAlcoholic = (index) => {
+    const newNonAlcoholicIngredients = [...selectedNonAlcoholic];
+    newNonAlcoholicIngredients.splice(index, 1);
+    setSelectedNonAlcoholic(newNonAlcoholicIngredients)
+  }
+
   return (
     <Container className="add-new-recipe-container">
       {editMode ? (
@@ -189,25 +195,37 @@ const AddNewRecipe = ({ loggedInUser, editMode }) => {
                   </Input>
                 </FormGroup>
                 <FormGroup>
-                  <Label for="nonAlcoholic">Non-Alcoholic Ingredients</Label>
+                <Label for="nonAlcoholic">Non-Alcoholic Ingredients</Label>
                   {selectedNonAlcoholic.map((ingredient, index) => (
-                    <Input
-                      type="select"
-                      name={`nonAlcoholic-${index}`}
-                      id={`nonAlcoholic-${index}`}
-                      value={ingredient}
-                      onChange={(e) =>
-                        handleIngredientChange(index, e.target.value)
-                      }
-                      key={index}
-                    >
-                      <option value="">Select an ingredient</option>
-                      {nonAlcoholicIngredients.map((ingredient) => (
-                        <option key={ingredient.id} value={ingredient.id}>
-                          {ingredient.name}
-                        </option>
-                      ))}
-                    </Input>
+                    <div key={index} className="d-flex align-items-center">
+                      <Input
+                        type="select"
+                        name={`nonAlcoholic-${index}`}
+                        id={`nonAlcoholic-${index}`}
+                        value={ingredient}
+                        onChange={(e) =>
+                          handleIngredientChange(index, e.target.value)
+                        }
+                      >
+                        <option value="">Select an ingredient</option>
+                        {nonAlcoholicIngredients.map((ingredient) => (
+                          <option key={ingredient.id} value={ingredient.id}>
+                            {ingredient.name}
+                          </option>
+                        ))}
+                      </Input>
+                      {editMode && (
+                        <Button
+                          type="button"
+                          color="danger"
+                          size="sm"
+                          onClick={() => handleDeleteNonAlcoholic(index)}
+                          className="ml-2"
+                        >
+                          &times;
+                        </Button>
+                      )}
+                    </div>
                   ))}
                   <Button type="button" onClick={handleAddNonAlcoholic}>
                     Add Another Non-Alcoholic Ingredient
