@@ -28,6 +28,7 @@ export const ViewCocktailRecipes = ({loggedInUser}) => {
                             <CardBody className="d-flex justify-content-between align-items-center"> 
                                 <CardTitle tag="h3">{recipe.name}</CardTitle>
                             </CardBody>
+                            <img src={recipe.image} alt={recipe.name}/>
                             <CardBody>
                                 <Button color="info" onClick={() => handleDetails(recipe.id)}>
                                     View Recipe

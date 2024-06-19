@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BoozeClues.Migrations
 {
     /// <inheritdoc />
-    public partial class quantityremovalupdate : Migration
+    public partial class addedimagecreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -217,7 +217,8 @@ namespace BoozeClues.Migrations
                     Name = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     Instructions = table.Column<string>(type: "text", nullable: false),
-                    GlassTypeId = table.Column<int>(type: "integer", nullable: false)
+                    GlassTypeId = table.Column<int>(type: "integer", nullable: false),
+                    Image = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -294,12 +295,12 @@ namespace BoozeClues.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "9ce89d88-75da-4a80-9b0d-3fe58582b8e2", 0, "c0de4f48-9774-4b4b-a966-c49fae333334", "bob@williams.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEMGr4AKYtU5wRoegu8/aZUshN7QCRpy1ZdKzbd0a0Vnh4CXLzRl7XLBEmLPP57RzmQ==", null, false, "9f5a4b54-f913-43ec-8a00-768558cbf9ff", false, "BobWilliams" },
-                    { "a7d21fac-3b21-454a-a747-075f072d0cf3", 0, "b8771d5d-3bc6-4afd-942f-60b8fb6d0940", "jane@smith.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEImffq9rXTq1/0UtSzFRGH0s8aZYAdYvBAhVRvqlhF179fZ/wRiQHiyzZCOszuSFJA==", null, false, "bfc5523f-8982-4602-91b5-39f4f12746dc", false, "JaneSmith" },
-                    { "c806cfae-bda9-47c5-8473-dd52fd056a9b", 0, "d618ef86-e8ee-45eb-98e6-97e29f126dee", "alice@johnson.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEIRtVqHsk1RmP3H8G5keRaXUXtnQR0NRCKtxFho00eIFfmtvYBjiYebu/cFv9MOmXw==", null, false, "d6efcd01-d1cd-43d1-bd98-52323ee5186a", false, "AliceJohnson" },
-                    { "d224a03d-bf0c-4a05-b728-e3521e45d74d", 0, "3ba80660-af06-4090-a420-afff7dc65a7c", "eve@davis.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEFb610aysyFXaRl6TTkYuopYp0eP2V5PEqEalfwu/RqDbCdD3nWGbk3DZu7MsiEEAA==", null, false, "ee989eb1-1626-429c-91ef-4bef5a5a7666", false, "EveDavis" },
-                    { "d8d76512-74f1-43bb-b1fd-87d3a8aa36df", 0, "9f6ea1a9-b0e2-4d51-9c93-5c65f7815a3e", "john@doe.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEOTtgrD7hCS8pyA/N++tUKPkBV2Xyqq9YokWcB524u3AZwBcGNmh5N89UnYmmYrNnQ==", null, false, "ccc63b16-3195-447a-b9c1-fa4ec41ab2ff", false, "JohnDoe" },
-                    { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "0249953c-d42a-4567-a839-cda3fdd66d78", "admina@strator.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEOdOyAo1E6wQ/r389lwLM1yy+A+APdy1ksL+je2Jp3Px6XErVj1ycRcMcICdRoSnlQ==", null, false, "b97c33fe-ebde-4a50-a25e-01922177087d", false, "Administrator" }
+                    { "9ce89d88-75da-4a80-9b0d-3fe58582b8e2", 0, "7332c7be-7197-4f07-97f0-b3c2473b2b21", "bob@williams.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEMpozTLuFcaYAeiPzzhhCK3uVm/riSADxM0moMysuZY38Gshh2YJflN1cvAm2Vs66w==", null, false, "0129f906-d8f5-4729-b865-b2a7d8c19b4e", false, "BobWilliams" },
+                    { "a7d21fac-3b21-454a-a747-075f072d0cf3", 0, "d1db2e58-2f10-4bb3-b326-b39bbe411bdd", "jane@smith.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEHsuejOJl3ZdY/UMQOQRIsc8QbGiGvcVrAZ7543eRcDUb/gLkEmiqPgrnMC3RSnT4A==", null, false, "ddbaa7cf-de52-4a44-8897-1d2acbc690a1", false, "JaneSmith" },
+                    { "c806cfae-bda9-47c5-8473-dd52fd056a9b", 0, "4372cf40-8a56-491b-a7a5-3e4527e51670", "alice@johnson.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEGg/lpc+fk/ovVNdZhEaSjXce9oJkCcX5r3Raj3PRRqpvljunMEZT8PflTydjP0y6A==", null, false, "f5f42ade-6ef0-47d6-a070-aa495caf212a", false, "AliceJohnson" },
+                    { "d224a03d-bf0c-4a05-b728-e3521e45d74d", 0, "51738b56-dc8c-4399-923d-1ea54d9f598d", "eve@davis.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEBqt43ekniyh5h6ZeATfyu2oSz2AxHe9kbX9j/ZsuSH581GBHXfEKr5wZQomgK0n1A==", null, false, "73ff80e4-9264-44fb-9d76-95cf27121ce4", false, "EveDavis" },
+                    { "d8d76512-74f1-43bb-b1fd-87d3a8aa36df", 0, "78ed81d5-5c61-4e63-b6cd-37aa6d4519ea", "john@doe.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEAFS7N7yyNFCWLHGqA1nR/TrtSNAOV3KVWjKLkpcEs3Y1E3J7+oncTaLnbAJbYWfPQ==", null, false, "6a2d15b8-2f62-492a-bbdb-880af8052e51", false, "JohnDoe" },
+                    { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "605d20c7-d5b3-4c92-8598-0aca94f5005a", "admina@strator.com", false, false, null, null, null, "AQAAAAIAAYagAAAAEJqHxJFYShUwETvxArbLhG2R9kkhvzHbuekfXB2O9iMCfgeHlH3Ynt/KvEvPuBzEfQ==", null, false, "83667d75-df59-48d7-9dd7-69078dd4d3ba", false, "Administrator" }
                 });
 
             migrationBuilder.InsertData(
@@ -372,24 +373,24 @@ namespace BoozeClues.Migrations
 
             migrationBuilder.InsertData(
                 table: "CocktailRecipes",
-                columns: new[] { "Id", "Description", "GlassTypeId", "Instructions", "Name", "UserProfileId" },
+                columns: new[] { "Id", "Description", "GlassTypeId", "Image", "Instructions", "Name", "UserProfileId" },
                 values: new object[,]
                 {
-                    { 1, "A refreshing tequila-based cocktail with lime juice and Cointreau.", 1, "Shake all ingredients with ice, then strain into a chilled glass.", "Margarita", 1 },
-                    { 2, "A classic cocktail made with bourbon, simple syrup, and bitters.", 3, "Stir ingredients with ice, then strain into a glass over ice.", "Old Fashioned", 2 },
-                    { 3, "A stylish cocktail featuring vodka, triple sec, lime juice, and cranberry juice.", 2, "Shake all ingredients with ice, then strain into a chilled glass.", "Cosmopolitan", 3 },
-                    { 4, "A minty and refreshing cocktail made with rum, lime juice, and soda water.", 1, "Muddle mint leaves with lime juice and sugar, then add rum and top up with soda water.", "Mojito", 4 },
-                    { 5, "A tropical cocktail made with rum, coconut cream, and pineapple juice.", 1, "Blend all ingredients with ice until smooth, then serve in a chilled glass.", "Pina Colada", 5 },
-                    { 6, "A classic cocktail made with gin and a touch of blue curacao.", 2, "Stir ingredients with ice, then strain into a chilled glass.", "Martini", 6 },
-                    { 7, "A fruity cocktail made with rum, maraschino liqueur, peach schnapps, and lemon juice.", 4, "Shake all ingredients with ice, then strain into a glass over ice.", "Mai Tai", 1 },
-                    { 8, "A spicy and refreshing cocktail made with vodka, lime juice, and ginger beer.", 1, "Combine ingredients in a glass with ice, then stir gently.", "Moscow Mule", 2 },
-                    { 9, "A tangy cocktail made with bourbon, simple syrup, and lemon juice.", 3, "Shake all ingredients with ice, then strain into a glass over ice.", "Whiskey Sour", 3 },
-                    { 10, "A sweet and sour cocktail made with rum, simple syrup, and lime juice.", 5, "Shake all ingredients with ice, then strain into a chilled glass.", "Daiquiri", 4 },
-                    { 11, "A colorful cocktail made with tequila, orange juice, and grenadine.", 1, "Pour tequila and orange juice into a glass with ice, then drizzle grenadine on top.", "Tequila Sunrise", 5 },
-                    { 12, "A strong cocktail made with vodka, gin, rum, triple sec, lime juice, and soda water.", 1, "Shake all ingredients except soda water with ice, then strain into a glass and top up with soda water.", "Long Island Iced Tea", 6 },
-                    { 13, "A savory cocktail made with vodka, tomato juice, and lemon juice.", 1, "Combine ingredients in a glass with ice, then stir gently.", "Bloody Mary", 1 },
-                    { 14, "A bitter and balanced cocktail made with gin, blue curacao, and bitters.", 2, "Stir ingredients with ice, then strain into a glass over ice.", "Negroni", 2 },
-                    { 15, "A vibrant cocktail made with vodka, blue curacao, and orange juice.", 2, "Shake all ingredients with ice, then strain into a chilled glass.", "Blue Lagoon", 3 }
+                    { 1, "A refreshing tequila-based cocktail with lime juice and Cointreau.", 1, "https://recipes.net/wp-content/uploads/2023/05/classic-margarita-recipe_780ef5cf753cf58502c26278fa094aa1.jpeg", "Shake all ingredients with ice, then strain into a chilled glass.", "Margarita", 1 },
+                    { 2, "A classic cocktail made with bourbon, simple syrup, and bitters.", 3, "https://www.liquor.com/thmb/IgE3k1GbbNMWVCpmFI3-kKSx3eM=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/bourbon-old-fashioned-4000x4000-primary-ig-f0ce04bec6754db187ab1e8a16fd45c3.jpg", "Stir ingredients with ice, then strain into a glass over ice.", "Old Fashioned", 2 },
+                    { 3, "A stylish cocktail featuring vodka, triple sec, lime juice, and cranberry juice.", 2, "https://toriavey.com/images/2011/03/The-Kosher-Cosmo-1.jpeg", "Shake all ingredients with ice, then strain into a chilled glass.", "Cosmopolitan", 3 },
+                    { 4, "A minty and refreshing cocktail made with rum, lime juice, and soda water.", 1, "https://mixthatdrink.com/wp-content/uploads/2009/03/mojito-750x1126.jpg", "Muddle mint leaves with lime juice and sugar, then add rum and top up with soda water.", "Mojito", 4 },
+                    { 5, "A tropical cocktail made with rum, coconut cream, and pineapple juice.", 1, "https://cookingwithcurls.com/wp-content/uploads/2015/04/Classic-Pi%C3%B1a-Colada-A-sweet-tropical-cocktail-made-with-rum-pineapple-juice-and-coconut-cream-cookingwithcurls.com_.jpg", "Blend all ingredients with ice until smooth, then serve in a chilled glass.", "Pina Colada", 5 },
+                    { 6, "A classic cocktail made with gin and a touch of blue curacao.", 2, "https://www.liquor.com/thmb/uiVEGvb2jIR-Y_IyKZCIPrxrt-U=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/vodka-martini-1500x1500-hero-080af5bb8ff04851a9c0ecf77a88a818.jpg", "Stir ingredients with ice, then strain into a chilled glass.", "Martini", 6 },
+                    { 7, "A fruity cocktail made with rum, maraschino liqueur, peach schnapps, and lemon juice.", 4, "https://www.aberdeenskitchen.com/wp-content/uploads/2016/06/Tropical-Mai-Tai-Cocktail-4-680x1024.jpg", "Shake all ingredients with ice, then strain into a glass over ice.", "Mai Tai", 1 },
+                    { 8, "A spicy and refreshing cocktail made with vodka, lime juice, and ginger beer.", 1, "https://www.thewinecellargroup.com/wp-content/uploads/2019/09/mule.jpg", "Combine ingredients in a glass with ice, then stir gently.", "Moscow Mule", 2 },
+                    { 9, "A tangy cocktail made with bourbon, simple syrup, and lemon juice.", 3, "https://www.whisky-sour.com/images/16x9/whiskey-sour-16x9.jpg", "Shake all ingredients with ice, then strain into a glass over ice.", "Whiskey Sour", 3 },
+                    { 10, "A sweet and sour cocktail made with rum, simple syrup, and lime juice.", 5, "https://d194ip2226q57d.cloudfront.net/images/daiquiri.original.png", "Shake all ingredients with ice, then strain into a chilled glass.", "Daiquiri", 4 },
+                    { 11, "A colorful cocktail made with tequila, orange juice, and grenadine.", 1, "https://www.liquor.com/thmb/jjV_5roCvfnVgzYU89UROFguRpM=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/tequila-sunrise-1500x1500-hero-eeae10efeb134a3e9d5a3852b1b6e7dc.jpg", "Pour tequila and orange juice into a glass with ice, then drizzle grenadine on top.", "Tequila Sunrise", 5 },
+                    { 12, "A strong cocktail made with vodka, gin, rum, triple sec, lime juice, and soda water.", 1, "https://robbreport.com/wp-content/uploads/2022/08/GettyImages_Long_Island_Iced_Tea.jpg?w=1000", "Shake all ingredients except soda water with ice, then strain into a glass and top up with soda water.", "Long Island Iced Tea", 6 },
+                    { 13, "A savory cocktail made with vodka, tomato juice, and lemon juice.", 1, "https://vinepair.com/wp-content/uploads/2021/04/extraspicybloodymary_card.jpg", "Combine ingredients in a glass with ice, then stir gently.", "Bloody Mary", 1 },
+                    { 14, "A bitter and balanced cocktail made with gin, blue curacao, and bitters.", 2, "https://www.liquor.com/thmb/zafM9xOaJsoNMu0SMRcFw_Fxv3w=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/kingston-negroni-720x720-primary1-ef87562fea8240de92dd09c36457a8c2.jpg", "Stir ingredients with ice, then strain into a glass over ice.", "Negroni", 2 },
+                    { 15, "A vibrant cocktail made with vodka, blue curacao, and orange juice.", 2, "https://ik.imagekit.io/vjt1kualr/drinks/blue_lagoon/main-image.jpg", "Shake all ingredients with ice, then strain into a chilled glass.", "Blue Lagoon", 3 }
                 });
 
             migrationBuilder.InsertData(

@@ -16,12 +16,11 @@ public class CocktailRecipeDTO
     public string Description { get; set; }
     public string Instructions { get; set; }
     public int? GlassTypeId { get; set; }
-    public string? Image { get; set; }
 
     public UserProfileDTO UserProfile { get; set; }
 
     public GlassTypeDTO? GlassType { get; set; }
-    // public string ImageUrl { get; set; }
+    public string? Image { get; set; }
     public List<RecipeIngredientDTO>? RecipeIngredients { get; set; }
     public List<IngredientDTO>? Ingredients { get; set; }
 }

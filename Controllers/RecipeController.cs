@@ -38,6 +38,7 @@ public class CocktailRecipeController : ControllerBase
                 Description = cr.Description,
                 Instructions = cr.Instructions,
                 GlassTypeId = cr.GlassTypeId,
+                Image = cr.Image,
                 Ingredients = cr
                     .RecipeIngredients.Select(ri => new IngredientDTO
                     {
@@ -82,6 +83,7 @@ public class CocktailRecipeController : ControllerBase
             Description = recipe.Description,
             Instructions = recipe.Instructions,
             GlassTypeId = recipe.GlassTypeId,
+            Image = recipe.Image,
             GlassType = new GlassTypeDTO
             {
                 Id = recipe.GlassType.Id,
@@ -128,7 +130,7 @@ public class CocktailRecipeController : ControllerBase
         }
 
     [HttpPost]
-    public IActionResult AddRecipe([FromBody] CreateRecipeDTO newRecipeDTO)
+    public async Task<IActionResult> AddRecipe([FromForm] IFormFile image, [FromForm] CreateRecipeDTO newRecipeDTO)
     {
         if (!ModelState.IsValid)
         {
@@ -146,6 +148,23 @@ public class CocktailRecipeController : ControllerBase
             
         };
 
+        if (image != null && image.Length > 0)
+            {
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "client", "public", "uploads");
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+
+                var filePath = Path.Combine(uploadsFolder, image.FileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await image.CopyToAsync(stream);
+                }
+
+                newRecipe.Image = $"/uploads/{image.FileName}";
+            }
+
         _dbContext.CocktailRecipes.Add(newRecipe);
         _dbContext.SaveChanges();
 
@@ -155,23 +174,27 @@ public class CocktailRecipeController : ControllerBase
             {
                 return BadRequest("At lease one ingredient is required");
             }
+
+            
             RecipeIngredient recipeIngredient = new RecipeIngredient
             {
                 CocktailRecipeId = newRecipe.Id,
                 IngredientId = Ingredient
             };
 
+            
+
             _dbContext.RecipeIngredients.Add(recipeIngredient);
             
         }
 
-        _dbContext.SaveChanges();
+        await _dbContext.SaveChangesAsync();
 
         return Ok();
     }
 
     [HttpPut("{id}")]
-    public IActionResult EditRecipe(int id, [FromBody] CreateRecipeDTO updatedRecipeDTO)
+    public async Task<IActionResult> EditRecipe(int id, [FromForm] IFormFile image, [FromForm] CreateRecipeDTO updatedRecipeDTO)
     {
         if(!ModelState.IsValid)
         {
@@ -189,6 +212,23 @@ public class CocktailRecipeController : ControllerBase
         existingRecipe.Instructions = updatedRecipeDTO.Instructions;
         existingRecipe.GlassTypeId = updatedRecipeDTO.GlassTypeId;
         existingRecipe.UserProfileId = updatedRecipeDTO.UserProfileId;
+
+        if (image != null && image.Length > 0)
+            {
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "client", "public", "uploads");
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+
+                var filePath = Path.Combine(uploadsFolder, image.FileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await image.CopyToAsync(stream);
+                }
+
+                existingRecipe.Image = $"/uploads/{image.FileName}";
+            }
 
         _dbContext.Entry(existingRecipe).State = EntityState.Modified;
 
@@ -215,7 +255,7 @@ public class CocktailRecipeController : ControllerBase
             _dbContext.RecipeIngredients.Add(recipeIngredient);
         }
 
-            _dbContext.SaveChanges();
+           await _dbContext.SaveChangesAsync();
 
             return Ok();
     }
