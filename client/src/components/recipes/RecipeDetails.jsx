@@ -47,7 +47,7 @@ const RecipeDetails = ({loggedInUser}) => {
       <Card>
         <Row>
           <Col md="4">
-            <CardImg top src={recipe.imageUrl} alt={recipe.name} />
+            <CardImg top src={recipe.image} alt={recipe.name} />
           </Col>
           <Col md="8">
             <CardBody>
