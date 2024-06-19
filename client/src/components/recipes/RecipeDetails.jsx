@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { getRecipeById } from '../../managers/recipeManager';
-import { Button, Card, CardBody, CardTitle, CardImg, Container, Row, Col, ListGroup, ListGroupItem } from 'reactstrap';
 import { useParams, useNavigate } from 'react-router-dom';
 import { deleteRecipe, getRecipeById, getRecipes } from '../../managers/recipeManager';
 import { Button,Card, CardBody, CardTitle, CardImg, Container, Row, Col, ListGroup, ListGroupItem } from 'reactstrap';
 import './RecipeDetails.css';
 import ConfirmDelete from '../../modals/ConfirmDelete.jsx';
 
-const RecipeDetails = ({loggedInUser}{loggedInUser}) => {
+const RecipeDetails = ({loggedInUser}) => {
   const { id } = useParams();
   const [recipe, setRecipe] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
@@ -24,9 +21,6 @@ const RecipeDetails = ({loggedInUser}{loggedInUser}) => {
     return <div>Loading...</div>;
   }
 
-  const handleEdit = (recipeId) => {
-    navigate(`/edit/${recipeId}`)
-};
   const toggleModal = () => {
     setModalOpen(!modalOpen)
   };
@@ -63,11 +57,6 @@ const RecipeDetails = ({loggedInUser}{loggedInUser}) => {
                   </ListGroupItem>
                 ))}
               </ListGroup>
-              {loggedInUser && recipe.userProfileId === loggedInUser.id && (
-                                    <Button color="warning" size="sm" onClick={() => handleEdit(recipe.id)}>
-                                        Edit
-                                    </Button>
-                                )}
             </CardBody>
           </Col>
         </Row>
