@@ -17,9 +17,6 @@ export const ViewCocktailRecipes = ({loggedInUser}) => {
         navigate(`/recipes/${recipeId}`);
     };
 
-    const handleEdit = (recipeId) => {
-        navigate(`/edit/${recipeId}`)
-    };
 
     return (
         <Container className="cocktail-recipes-list-container">
@@ -30,11 +27,6 @@ export const ViewCocktailRecipes = ({loggedInUser}) => {
                         <Card>
                             <CardBody className="d-flex justify-content-between align-items-center"> 
                                 <CardTitle tag="h3">{recipe.name}</CardTitle>
-                                {loggedInUser && recipe.userProfileId === loggedInUser.id && (
-                                    <Button color="warning" size="sm" onClick={() => handleEdit(recipe.id)}>
-                                        Edit
-                                    </Button>
-                                )}
                             </CardBody>
                             <CardBody>
                                 <Button color="info" onClick={() => handleDetails(recipe.id)}>

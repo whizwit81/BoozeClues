@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getRecipeById } from '../../managers/recipeManager';
-import { Card, CardBody, CardTitle, CardImg, Container, Row, Col, ListGroup, ListGroupItem } from 'reactstrap';
+import { Button, Card, CardBody, CardTitle, CardImg, Container, Row, Col, ListGroup, ListGroupItem } from 'reactstrap';
 import './RecipeDetails.css';
 
-const RecipeDetails = () => {
+const RecipeDetails = ({loggedInUser}) => {
   const { id } = useParams();
   const [recipe, setRecipe] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getRecipeById(id).then(setRecipe);
@@ -15,6 +16,10 @@ const RecipeDetails = () => {
   if (!recipe) {
     return <div>Loading...</div>;
   }
+
+  const handleEdit = (recipeId) => {
+    navigate(`/edit/${recipeId}`)
+};
 
   return (
     <Container className="recipe-details-container">
@@ -36,6 +41,11 @@ const RecipeDetails = () => {
                   </ListGroupItem>
                 ))}
               </ListGroup>
+              {loggedInUser && recipe.userProfileId === loggedInUser.id && (
+                                    <Button color="warning" size="sm" onClick={() => handleEdit(recipe.id)}>
+                                        Edit
+                                    </Button>
+                                )}
             </CardBody>
           </Col>
         </Row>

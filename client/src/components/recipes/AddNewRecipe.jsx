@@ -77,7 +77,7 @@ const AddNewRecipe = ({ loggedInUser, editMode }) => {
       userProfileId: loggedInUser.id,
       glassTypeId: chosenGlassType,
     };
-    console.log(newRecipe);
+    
 
     if (editMode) {
       await editRecipe(id, newRecipe);

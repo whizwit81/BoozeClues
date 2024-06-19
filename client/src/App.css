@@ -36,3 +36,28 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  /* padding-top: 70px; */
+  background-image: url('/BackgroundImage2.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  min-height: 100vh;
+  margin: 0; /* Ensure no default margin */
+  font-family: Arial, sans-serif; /* Optional: Set a default font */
+}
+.App {
+  min-height: 100vh; /* Ensure the div covers the viewport height */
+}
+
+.navbar.fixed-navbar{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
