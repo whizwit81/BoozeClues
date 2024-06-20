@@ -25,7 +25,7 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
     <div>
       <Navbar color="light" light className="fixed-navbar" fixed="true" expand="lg">
         <NavbarBrand className="mr-auto" tag={RRNavLink} to="/">
-          🍸 BoozeClues 🍸
+          <img src="/uploads/BoozeCluesNew.png" alt="BoozeClues Logo" className="navbar-logo"/>
         </NavbarBrand>
         {loggedInUser ? (
           <>
@@ -45,7 +45,7 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
               </Nav>
             </Collapse>
             <Button
-              color="primary"
+              className="custom-button"
               onClick={(e) => {
                 e.preventDefault();
                 setOpen(false);
@@ -63,7 +63,7 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
           <Nav navbar>
             <NavItem>
               <NavLink tag={RRNavLink} to="/login">
-                <Button color="primary">Login</Button>
+                <Button className="custom-button">Login</Button>
               </NavLink>
             </NavItem>
           </Nav>

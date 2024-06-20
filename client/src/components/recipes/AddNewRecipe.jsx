@@ -83,7 +83,7 @@ const AddNewRecipe = ({ loggedInUser, editMode }) => {
     
 
     if (editMode) {
-      await editRecipe(id, formData);
+       await editRecipe(parseInt(id), formData);
       navigate("/recipes");
     } else {
       await addRecipe(formData);
@@ -131,7 +131,7 @@ const AddNewRecipe = ({ loggedInUser, editMode }) => {
   const fileSelectedHandler = (event) => {
     setSelectedFile(event.target.files[0]);
   };
-  
+
   return (
     <Container className="add-new-recipe-container">
       {editMode ? (

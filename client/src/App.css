@@ -21,11 +21,11 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #F1ECE1;
 }
 
 .App-link {
-  color: #61dafb;
+  color: #D4821F;
 }
 
 @keyframes App-logo-spin {
@@ -39,7 +39,7 @@
 
 body {
   /* padding-top: 70px; */
-  background-image: url('/BackgroundImage2.jpg');
+  background-image: url('/BackroundImage.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -57,7 +57,20 @@ body {
   top: 0;
   width: 100%;
   z-index: 1000;
-  background-color: #fff;
+  background-color: #F1ECE1;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+.navbar-logo{
+  height: 40px;
+  width: auto;
+  max-height: 100%;
+  display: inline-block;
+  object-fit: contain;
+}
+
+.custom-button{
+  background-color:#D4821F !important ;
+  border-color: #D4821F !important;
+  color: white;
+}

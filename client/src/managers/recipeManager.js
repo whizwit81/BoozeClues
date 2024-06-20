@@ -20,7 +20,7 @@ export const editRecipe = (id, formData) => {
     return fetch(`${_apiUrl}/${id}`, {
         method: 'PUT',
         body: formData,
-    }).then((res) => res.json());
+    })
   };
 
 export const getNonAlcoholicIngredients = () => {

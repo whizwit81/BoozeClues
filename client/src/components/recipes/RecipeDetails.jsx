@@ -44,12 +44,12 @@ const RecipeDetails = ({loggedInUser}) => {
   return (
     <Container className="recipe-details-container">
       <h2 className="text-center mb-4">{recipe.name}</h2>
-      <Card>
-        <Row>
-          <Col md="4">
-            <CardImg top src={recipe.image} alt={recipe.name} />
+      <Card className='recipe-card'>
+        <Row noGutters className='h-100'>
+          <Col md="4" className='d-flex align-items-center'>
+            <CardImg top src={recipe.image} alt={recipe.name} className='recipe-image' />
           </Col>
-          <Col md="8">
+          <Col md="8" className='d-flex flex flex-column justify-content-center'>
             <CardBody>
               <CardTitle tag="h4">Instructions</CardTitle>
               <p>{recipe.instructions}</p>
