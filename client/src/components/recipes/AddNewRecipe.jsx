@@ -35,7 +35,6 @@ const AddNewRecipe = ({ loggedInUser, editMode }) => {
   const [glassTypes, setGlassTypes] = useState([]);
   const [chosenGlassType, setChosenGlassType] = useState("");
   const [alcoholicQuantities, setAlcoholicQuantities] = useState({});
-  const [selectedFile, setSelectedFile] = useState(null);
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -60,33 +59,31 @@ const AddNewRecipe = ({ loggedInUser, editMode }) => {
 
         setSelectedNonAlcoholic(nonAlcoholicIds);
         setSelectedAlcoholic(alcoholicIds);
-        setSelectedFile(recipe.image || null)
       });
     }
-  }, [editMode, id]);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("description", description);
-    formData.append("instructions", instructions);
-    formData.append("glassTypeId", chosenGlassType);
-    formData.append("userProfileId", loggedInUser.id);
-
-    selectedNonAlcoholic.forEach(id => formData.append("ingredients", id));
-    selectedAlcoholic.forEach(id => formData.append("ingredients", id));
-    if (selectedFile) {
-      formData.append("image", selectedFile);
-    }
+    const newRecipe = {
+      name: name,
+      description: description,
+      instructions: instructions,
+      ingredients: [
+        ...selectedNonAlcoholic.map((id) => id),
+        ...selectedAlcoholic.map((id) => id),
+      ],
+      userProfileId: loggedInUser.id,
+      glassTypeId: chosenGlassType,
+    };
     
 
     if (editMode) {
-      await editRecipe(id, formData);
+      await editRecipe(id, newRecipe);
       navigate("/recipes");
     } else {
-      await addRecipe(formData);
+      await addRecipe(newRecipe);
       navigate("/recipes");
     }
   };
@@ -128,10 +125,6 @@ const AddNewRecipe = ({ loggedInUser, editMode }) => {
     setSelectedNonAlcoholic(newNonAlcoholicIngredients)
   }
 
-  const fileSelectedHandler = (event) => {
-    setSelectedFile(event.target.files[0]);
-  };
-  
   return (
     <Container className="add-new-recipe-container">
       {editMode ? (
@@ -265,13 +258,6 @@ const AddNewRecipe = ({ loggedInUser, editMode }) => {
                     </Label>
                   </FormGroup>
                 ))}
-              </FormGroup>
-              <FormGroup>
-                <Input
-                type="file"
-                onChange={fileSelectedHandler} 
-                >
-                </Input>
               </FormGroup>
             </CardBody>
           </Card>

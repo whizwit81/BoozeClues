@@ -21,16 +21,18 @@ export const ViewCocktailRecipes = ({loggedInUser}) => {
     return (
         <Container className="cocktail-recipes-list-container">
             <h2 className="text-center">Cocktail Recipes</h2>
-            <Row className="justify-content-center cocktail-recipes-list">
+            <Row className="justify-content-center align-items-center cocktail-recipes-list">
                 {recipes.map(recipe => (
                     <Col md="4" sm="6" xs="12" key={recipe.id} className="cocktail-recipe">
-                        <Card>
-                            <CardBody className="d-flex justify-content-between align-items-center"> 
-                                <CardTitle tag="h3">{recipe.name}</CardTitle>
-                            </CardBody>
-                            <img src={recipe.image} alt={recipe.name}/>
-                            <CardBody>
-                                <Button color="info" onClick={() => handleDetails(recipe.id)}>
+                        <Card className="h-100" d-flex flex-row align-items-center> 
+                            <CardImg 
+                                src={recipe.image} 
+                                alt={recipe.name} 
+                                className="recipe-image" 
+                            />
+                            <CardBody className="d-flex flex-column justify-content-between align-items-center">
+                                <CardTitle tag="h3" className="text-center">{recipe.name}</CardTitle>
+                                <Button className="custom-button" onClick={() => handleDetails(recipe.id)}>
                                     View Recipe
                                 </Button>
                             </CardBody>

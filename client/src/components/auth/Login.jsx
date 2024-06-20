@@ -22,7 +22,8 @@ export default function Login({ setLoggedInUser }) {
   };
 
   return (
-    <div className="container" style={{ maxWidth: "500px" }}>
+    <div className="login-container" style={{ maxWidth: "500px" }}>
+      <div className="login-card"></div>
       <h3>Login</h3>
       <FormGroup>
         <Label>Email</Label>
@@ -50,12 +51,13 @@ export default function Login({ setLoggedInUser }) {
         <FormFeedback>Login failed.</FormFeedback>
       </FormGroup>
 
-      <Button color="primary" onClick={handleSubmit}>
+      <Button style={{ backgroundColor: '#D4821F', borderColor: '#D4821F' }} onClick={handleSubmit}>
         Login
       </Button>
       <p>
         Not signed up? Register <Link to="/register">here</Link>
       </p>
     </div>
+    
   );
 }

@@ -15,11 +15,30 @@
 }
 
 .cocktail-recipe .card {
-    border: 1px solid #ddd;
+    border: 1px solid #F1ECE1;
     border-radius: 8px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.cocktail-recipe .recipe-image{
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px; 
 }
 
 .cocktail-recipe .card-title {
     margin-top: 0;
     text-align: center;
+    flex: 1;
+}
+
+.cocktail-recipe .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #F1ECE1;
 }
