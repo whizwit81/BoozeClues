@@ -35,6 +35,7 @@ const AddNewRecipe = ({ loggedInUser, editMode }) => {
   const [glassTypes, setGlassTypes] = useState([]);
   const [chosenGlassType, setChosenGlassType] = useState("");
   const [alcoholicQuantities, setAlcoholicQuantities] = useState({});
+  const [selectedFile, setSelectedFile] = useState(null);
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -59,31 +60,33 @@ const AddNewRecipe = ({ loggedInUser, editMode }) => {
 
         setSelectedNonAlcoholic(nonAlcoholicIds);
         setSelectedAlcoholic(alcoholicIds);
+        setSelectedFile(recipe.image || null)
       });
     }
-  }, []);
+  }, [editMode, id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newRecipe = {
-      name: name,
-      description: description,
-      instructions: instructions,
-      ingredients: [
-        ...selectedNonAlcoholic.map((id) => id),
-        ...selectedAlcoholic.map((id) => id),
-      ],
-      userProfileId: loggedInUser.id,
-      glassTypeId: chosenGlassType,
-    };
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("description", description);
+    formData.append("instructions", instructions);
+    formData.append("glassTypeId", chosenGlassType);
+    formData.append("userProfileId", loggedInUser.id);
+
+    selectedNonAlcoholic.forEach(id => formData.append("ingredients", id));
+    selectedAlcoholic.forEach(id => formData.append("ingredients", id));
+    if (selectedFile) {
+      formData.append("image", selectedFile);
+    }
     
 
     if (editMode) {
-      await editRecipe(id, newRecipe);
+       await editRecipe(parseInt(id), formData);
       navigate("/recipes");
     } else {
-      await addRecipe(newRecipe);
+      await addRecipe(formData);
       navigate("/recipes");
     }
   };
@@ -124,6 +127,10 @@ const AddNewRecipe = ({ loggedInUser, editMode }) => {
     newNonAlcoholicIngredients.splice(index, 1);
     setSelectedNonAlcoholic(newNonAlcoholicIngredients)
   }
+
+  const fileSelectedHandler = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
 
   return (
     <Container className="add-new-recipe-container">
@@ -258,6 +265,13 @@ const AddNewRecipe = ({ loggedInUser, editMode }) => {
                     </Label>
                   </FormGroup>
                 ))}
+              </FormGroup>
+              <FormGroup>
+                <Input
+                type="file"
+                onChange={fileSelectedHandler} 
+                >
+                </Input>
               </FormGroup>
             </CardBody>
           </Card>
