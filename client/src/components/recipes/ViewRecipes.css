@@ -42,3 +42,9 @@
     justify-content: space-between;
     background-color: #F1ECE1;
 }
+
+.custom-button {
+    background-color: #D4821F !important;
+    border-color: #D4821F !important;
+    color: white !important;
+  }

@@ -3,21 +3,34 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: (100vh - 70px);
+    min-height: calc(100vh - 70px);
     text-align: center;
-    margin-top: 70px;
+    margin-top: 75px;
     padding: 20px;
 }
+
 
 .add-new-recipe-card{
     max-width: 600px;
-    border: 2px solid #e0e0e0;
+    border: 2px solid #F1ECE1;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    
 }
+
+.title-heading { /* <--------------added */
+    max-width: 600px; /* <--------------added */
+    margin-bottom: 20px; /* <--------------added */
+    padding: 10px; /* <--------------added */
+    border: 2px solid #e0e0e0; /* <--------------added */
+    border-radius: 10px; /* <--------------added */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* <--------------added */
+    background-color: #F1ECE1; /* <--------------added */
+  }
 
 .add-new-recipe-card .card-body{
     padding: 20px;
+    background-color: #F1ECE1;
 }
 
 .add-new-recipe-card .form-group{
@@ -27,3 +40,4 @@
 .add-new-recipe-card .btn{
     margin-top: 10px;
 }
+
