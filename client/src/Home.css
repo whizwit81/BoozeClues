@@ -3,7 +3,8 @@
     width: 500px; 
     height: 500px;
     border-radius: 50%; 
-    object-fit: cover; 
+    object-fit: contain; 
+    object-position: center;
   }
 .home-container {
     display: flex;

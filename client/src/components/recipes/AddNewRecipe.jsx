@@ -134,11 +134,12 @@ const AddNewRecipe = ({ loggedInUser, editMode }) => {
 
   return (
     <Container className="add-new-recipe-container">
-      {editMode ? (
+      <Card className="title-heading">{editMode ? (
         <h2 className="text-center">Edit your cocktail</h2>
       ) : (
         <h2 className="text-center">Add a New Cocktail!</h2>
       )}
+      </Card>
       <Row>
         <Col md="6">
           <Card className="add-new-recipe-card mx-auto">
@@ -234,7 +235,7 @@ const AddNewRecipe = ({ loggedInUser, editMode }) => {
                       )}
                     </div>
                   ))}
-                  <Button type="button" onClick={handleAddNonAlcoholic}>
+                  <Button  type="button" onClick={handleAddNonAlcoholic}>
                     Add Another Non-Alcoholic Ingredient
                   </Button>
                 </FormGroup>
@@ -248,9 +249,9 @@ const AddNewRecipe = ({ loggedInUser, editMode }) => {
               <CardTitle tag="h4" className="text-center">
                 Alcoholic Ingredients
               </CardTitle>
-              <FormGroup>
+              <FormGroup className="vertical-checkboxes">
                 {alcoholicIngredients.map((ingredient) => (
-                  <FormGroup check inline key={ingredient.id}>
+                  <FormGroup check key={ingredient.id}>
                     <Label check>
                       <Input
                         type="checkbox"
@@ -279,7 +280,7 @@ const AddNewRecipe = ({ loggedInUser, editMode }) => {
       </Row>
       <Row className="mt-4">
         <Col className="d-flex justify-content center">
-          <Button
+          <Button style={{ backgroundColor: '#D4821F', borderColor: '#D4821F' }}
             type="submit"
             color="primary"
             block
@@ -288,7 +289,7 @@ const AddNewRecipe = ({ loggedInUser, editMode }) => {
           >
             {editMode ? "Submit Edit" : "Add Cocktail"}
           </Button>
-          <Button
+          <Button 
             type="button"
             color="danger"
             className="mx-2"

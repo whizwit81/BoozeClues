@@ -38,18 +38,17 @@
 }
 
 body {
-  /* padding-top: 70px; */
-  background-image: url('/BackroundImage.jpg');
-  background-size: cover;
+  background-image: url('/UpdatedBar.jpg');
+  background-size: 100%;
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
   min-height: 100vh;
-  margin: 0; /* Ensure no default margin */
-  font-family: Arial, sans-serif; /* Optional: Set a default font */
+  margin: 0; 
+  font-family: Arial, sans-serif; 
 }
 .App {
-  min-height: 100vh; /* Ensure the div covers the viewport height */
+  min-height: 100vh;
 }
 
 .navbar.fixed-navbar{
@@ -73,4 +72,22 @@ body {
   background-color:#D4821F !important ;
   border-color: #D4821F !important;
   color: white;
+}
+
+.login-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-card{
+  max-width: 500px;
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  background-color: #e2d9ce;
+  text-align: center;
 }
